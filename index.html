@@ -577,6 +577,38 @@
       align-items: flex-end;
       justify-content: center;
     }
+    #pp-speech-bubble {
+      position: absolute;
+      top: 22%;
+      right: 75%;
+      background: rgba(20, 40, 80, 0.88);
+      color: #ffffff;
+      font-family: 'Noto Sans Thai', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1.6;
+      padding: 18px 28px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(100,160,255,0.4);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+      z-index: 5;
+      width: max-content;
+      max-width: 650px;
+      white-space: pre-line;
+      animation: bubblePop 0.4s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    #pp-speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: 18px;
+      right: -18px;
+      border: 10px solid transparent;
+      border-left-color: rgba(20, 40, 80, 0.88);
+    }
+    @keyframes bubblePop {
+      from { opacity: 0; transform: scale(0.7); }
+      to   { opacity: 1; transform: scale(1); }
+    }
     #person-portrait-placeholder {
       display: none;
     }
@@ -586,7 +618,7 @@
       flex: 1;
       border: 1px solid rgba(0,180,255,0.25);
       border-radius: 6px;
-      overflow: hidden;
+      overflow: visible;
       background: rgba(0,20,40,0.6);
       position: relative;
     }
@@ -602,6 +634,85 @@
       font-size: 0.7rem;
       letter-spacing: 0.12em;
     }
+    /* p4-layout: vertical bars + map side by side */
+    #person-page.p4-layout #pp-map-frame {
+      display: none;
+    }
+    #person-page.p4-layout .pp-divider.map-divider,
+    #person-page.p4-layout .pp-section-title.map-title {
+      display: none;
+    }
+    #pp-bottom-row {
+      display: none;
+      flex: 1;
+      gap: 16px;
+      min-height: 0;
+    }
+    #person-page.p4-layout #pp-bottom-row {
+      display: flex;
+    }
+    #person-page.p4-layout .pp-stat-row {
+      display: none;
+    }
+    #pp-vbars {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      gap: 16px;
+      width: 220px;
+      min-width: 220px;
+      flex-shrink: 0;
+      height: 100%;
+    }
+    .pp-vbar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      height: 100%;
+      gap: 6px;
+    }
+    .pp-vbar-pct {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #e0f6ff;
+      white-space: nowrap;
+    }
+    .pp-vbar-track {
+      flex: 1;
+      width: 28px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 7px;
+      position: relative;
+      overflow: visible;
+      display: flex;
+      align-items: flex-end;
+    }
+    .pp-vbar-fill {
+      width: 100%;
+      border-radius: 7px;
+      transition: height 3.5s cubic-bezier(0.25,0.8,0.25,1);
+      height: 0%;
+    }
+    .pp-vbar-label {
+      font-size: 0.75rem;
+      color: #7ab8d4;
+      text-align: center;
+      line-height: 1.3;
+      white-space: normal;
+      word-break: keep-all;
+    }
+    #pp-map-frame-p4 {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid rgba(0,180,255,0.25);
+      border-radius: 6px;
+      overflow: visible;
+      background: rgba(0,20,40,0.6);
+      position: relative;
+      min-height: 0;
+    }
+
     #pp-map-frame iframe {
       width: 100%;
       height: 100%;
@@ -875,6 +986,296 @@
     }
     #page3-back-btn:hover { background: rgba(0,60,120,0.8); }
 
+    /* Page 6 */
+    #page6 {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      background: #0a3d4a url('Gemini_Generated_Image_vi69syvi69syvi69.png') center/90% no-repeat;
+      display: none; opacity: 0; z-index: 40;
+      transition: opacity 0.6s ease; overflow: hidden;
+    }
+    #page6.show { opacity: 1; }
+    #page6-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-start; padding-left: 8%; position: relative; }
+    #p6-building-title {
+      position: fixed; white-space: nowrap; font-family: 'Sriracha', cursive; font-size: 1.8rem; font-weight: bold;
+      color: #1a0e00; letter-spacing: 0.06em; -webkit-text-stroke: 0.4px rgba(120,60,10,0.75);
+      text-shadow: 1px 1px 0 rgba(200,140,40,0.6), 0 2px 8px rgba(100,60,0,0.45); pointer-events: none;
+    }
+    #p6-building-img {
+      width: 95%; max-height: 90vh; object-fit: contain; display: block;
+      filter: brightness(1.1) contrast(1.15) saturate(1.1) drop-shadow(0 8px 32px rgba(60,30,0,0.75));
+      border-radius: 4px;
+      position: relative; z-index: 42;
+      -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 50%, black 25%, transparent 85%);
+      mask-image: radial-gradient(ellipse 70% 65% at 50% 50%, black 25%, transparent 85%);
+    }
+    #p6-panel {
+      position: fixed; right: -420px; top: 8%; bottom: 12%; width: 400px;
+      display: none; background: rgba(20,10,3,0.88); border: 2px solid rgba(200,150,40,0.7);
+      border-radius: 10px; padding: 20px 24px; z-index: 46;
+      transition: right 0.4s cubic-bezier(0.22,1,0.36,1); box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+    #p6-panel.open { right: 9%; }
+    #p6-panel.exit { right: -420px; transition: right 0.3s cubic-bezier(0.55,0,1,0.45); }
+    #p6-panel h2 { font-family: 'Sriracha', cursive; font-size: 1.3rem; color: #f5d87a; margin-bottom: 10px; border-bottom: 1px solid rgba(200,150,40,0.4); padding-bottom: 8px; text-align: center; }
+    #p6-img-grid { display: flex; flex-direction: column; gap: 3px; margin-top: 8px; }
+
+    /* Page 8 */
+    #page8 {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      background: #0a3d4a url('Gemini_Generated_Image_vi69syvi69syvi69.png') center/90% no-repeat;
+      display: none; opacity: 0; z-index: 40;
+      transition: opacity 0.6s ease; overflow: hidden;
+    }
+    #page8.show { opacity: 1; }
+    #page8-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-start; padding-left: 8%; position: relative; }
+    #p8-building-title {
+      position: fixed; white-space: nowrap; font-family: 'Sriracha', cursive; font-size: 1.8rem; font-weight: bold;
+      color: #1a0e00; letter-spacing: 0.06em; -webkit-text-stroke: 0.4px rgba(120,60,10,0.75);
+      text-shadow: 1px 1px 0 rgba(200,140,40,0.6), 0 2px 8px rgba(100,60,0,0.45); pointer-events: none;
+    }
+    #p8-building-img {
+      width: 95%; max-height: 90vh; object-fit: contain; display: block;
+      filter: brightness(1.1) contrast(1.15) saturate(1.1) drop-shadow(0 8px 32px rgba(60,30,0,0.75));
+      border-radius: 4px; position: relative; z-index: 42;
+      -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 50%, black 25%, transparent 85%);
+      mask-image: radial-gradient(ellipse 70% 65% at 50% 50%, black 25%, transparent 85%);
+    }
+    #p8-panel {
+      position: fixed; right: -420px; top: 8%; bottom: 12%; width: 400px;
+      display: none; background: rgba(20,10,3,0.88); border: 2px solid rgba(200,150,40,0.7);
+      border-radius: 10px; padding: 20px 24px; z-index: 46;
+      transition: right 0.4s cubic-bezier(0.22,1,0.36,1); box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+    #p8-panel.open { right: 9%; }
+    #p8-panel.exit { right: -420px; transition: right 0.3s cubic-bezier(0.55,0,1,0.45); }
+    #p8-panel h2 { font-family: 'Sriracha', cursive; font-size: 1.3rem; color: #f5d87a; margin-bottom: 10px; border-bottom: 1px solid rgba(200,150,40,0.4); padding-bottom: 8px; text-align: center; }
+    #p8-img-grid { display: flex; flex-direction: column; gap: 3px; margin-top: 8px; }
+
+    /* Page 7 */
+    #page7 {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      background: #0a3d4a url('Gemini_Generated_Image_vi69syvi69syvi69.png') center/90% no-repeat;
+      display: none; opacity: 0; z-index: 40;
+      transition: opacity 0.6s ease; overflow: hidden;
+    }
+    #page7.show { opacity: 1; }
+    #page7-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-start; padding-left: 8%; position: relative; }
+    #p7-building-title {
+      position: fixed; white-space: nowrap; font-family: 'Sriracha', cursive; font-size: 1.8rem; font-weight: bold;
+      color: #1a0e00; letter-spacing: 0.06em; -webkit-text-stroke: 0.4px rgba(120,60,10,0.75);
+      text-shadow: 1px 1px 0 rgba(200,140,40,0.6), 0 2px 8px rgba(100,60,0,0.45); pointer-events: none;
+    }
+    #p7-building-img {
+      width: 95%; max-height: 90vh; object-fit: contain; display: block;
+      filter: brightness(1.1) contrast(1.15) saturate(1.1) drop-shadow(0 8px 32px rgba(60,30,0,0.75));
+      border-radius: 4px; position: relative; z-index: 42;
+      -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 50%, black 25%, transparent 85%);
+      mask-image: radial-gradient(ellipse 70% 65% at 50% 50%, black 25%, transparent 85%);
+    }
+    #p7-panel {
+      position: fixed; right: -420px; top: 8%; bottom: 12%; width: 400px;
+      display: none; background: rgba(20,10,3,0.88); border: 2px solid rgba(200,150,40,0.7);
+      border-radius: 10px; padding: 20px 24px; z-index: 46;
+      transition: right 0.4s cubic-bezier(0.22,1,0.36,1); box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+    #p7-panel.open { right: 9%; }
+    #p7-panel.exit { right: -420px; transition: right 0.3s cubic-bezier(0.55,0,1,0.45); }
+    #p7-panel h2 { font-family: 'Sriracha', cursive; font-size: 1.3rem; color: #f5d87a; margin-bottom: 10px; border-bottom: 1px solid rgba(200,150,40,0.4); padding-bottom: 8px; text-align: center; }
+    #p7-img-grid { display: flex; flex-direction: column; gap: 3px; margin-top: 8px; }
+
+    /* Page 5 — ตึกแลป */
+    #page5 {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      background: #0a3d4a url('Gemini_Generated_Image_vi69syvi69syvi69.png') center/90% no-repeat;
+      display: none; opacity: 0; z-index: 40;
+      transition: opacity 0.6s ease; overflow: hidden;
+    }
+    #page5.show { opacity: 1; }
+    #page5-inner {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: flex-start;
+      padding-left: 8%; position: relative;
+    }
+    #p5-building-title {
+      position: fixed; white-space: nowrap;
+      font-family: 'Sriracha', cursive; font-size: 1.8rem; font-weight: bold;
+      color: #1a0e00; letter-spacing: 0.06em;
+      -webkit-text-stroke: 0.4px rgba(120,60,10,0.75);
+      text-shadow: 1px 1px 0 rgba(200,140,40,0.6), 0 2px 8px rgba(100,60,0,0.45);
+      pointer-events: none;
+    }
+    #p5-building-img {
+      width: 85%; max-height: 80vh; object-fit: contain; display: block;
+      filter: brightness(1.1) contrast(1.15) saturate(1.1)
+              drop-shadow(0 8px 32px rgba(60,30,0,0.75)) drop-shadow(0 3px 10px rgba(100,50,0,0.6));
+      border-radius: 4px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 50%, black 25%, transparent 85%);
+      mask-image: radial-gradient(ellipse 70% 65% at 50% 50%, black 25%, transparent 85%);
+    }
+    #p5-panel {
+      position: fixed; right: -420px; top: 8%; bottom: auto; width: 400px;
+      display: none; background: rgba(20,10,3,0.88);
+      border: 2px solid rgba(200,150,40,0.7); border-radius: 10px;
+      padding: 20px 24px; z-index: 46;
+      transition: right 0.4s cubic-bezier(0.22,1,0.36,1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+    #p5-panel.open { right: 9%; }
+    #p5-panel.exit { right: -420px; transition: right 0.3s cubic-bezier(0.55,0,1,0.45); }
+    #p5-panel h2 {
+      font-family: 'Sriracha', cursive; font-size: 1.3rem; color: #f5d87a;
+      margin-bottom: 10px; border-bottom: 1px solid rgba(200,150,40,0.4);
+      padding-bottom: 8px; text-align: center;
+    }
+    #p5-img-grid { display: flex; flex-direction: column; gap: 3px; margin-top: 8px; }
+
+    /* Page 4 — อาคารเรียน */
+    #page4 {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: #0a3d4a url('Gemini_Generated_Image_vi69syvi69syvi69.png') center/90% no-repeat;
+      display: none;
+      opacity: 0;
+      z-index: 40;
+      transition: opacity 0.6s ease;
+      overflow: hidden;
+    }
+    #page4.show { opacity: 1; }
+    #page4-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 8%;
+      position: relative;
+    }
+    #p4-building-title {
+      position: fixed;
+      white-space: nowrap;
+      font-family: 'Sriracha', cursive;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #1a0e00;
+      letter-spacing: 0.06em;
+      -webkit-text-stroke: 0.4px rgba(120,60,10,0.75);
+      text-shadow: 1px 1px 0 rgba(200,140,40,0.6), 0 2px 8px rgba(100,60,0,0.45);
+      pointer-events: none;
+    }
+    #p4-building-img {
+      width: 70%;
+      max-height: 70vh;
+      object-fit: contain;
+      display: block;
+      filter: brightness(1.1) contrast(1.15) saturate(1.1) drop-shadow(0 8px 32px rgba(60,30,0,0.75)) drop-shadow(0 3px 10px rgba(100,50,0,0.6));
+      border-radius: 4px;
+    }
+    #p4-floor-btn {
+      position: fixed;
+      z-index: 45;
+      cursor: pointer;
+      font-family: 'Sriracha', cursive;
+      font-size: 1rem;
+      color: #1a0e00;
+      background: rgba(200,150,40,0.18);
+      border: 2px solid rgba(200,150,40,0.6);
+      border-radius: 6px;
+      padding: 6px 18px;
+      display: none;
+      transition: background 0.2s;
+    }
+    #p4-floor-btn:hover { background: rgba(255,220,100,0.35); }
+
+    /* Page 4 popup panel */
+    #p4-panel {
+      position: fixed;
+      right: -420px;
+      top: 8%;
+      bottom: 12%;
+      width: 400px;
+      display: none;
+      background: rgba(20,10,3,0.88);
+      border: 2px solid rgba(200,150,40,0.7);
+      border-radius: 10px;
+      padding: 20px 24px;
+      z-index: 46;
+      transition: right 0.4s cubic-bezier(0.22,1,0.36,1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+    #p4-panel.open { right: 9%; }
+    #p4-panel.exit {
+      right: -420px;
+      transition: right 0.3s cubic-bezier(0.55,0,1,0.45);
+    }
+    #p4-panel h2 {
+      font-family: 'Sriracha', cursive;
+      font-size: 1.3rem;
+      color: #f5d87a;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(200,150,40,0.4);
+      padding-bottom: 8px;
+      text-align: center;
+    }
+    #p4-img-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-top: 8px;
+    }
+
+    /* Page Cabin */
+    #page-cabin {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      background: #0a3d4a url('Gemini_Generated_Image_vi69syvi69syvi69.png') center/90% no-repeat;
+      display: none; opacity: 0; z-index: 40;
+      transition: opacity 0.6s ease; overflow: hidden;
+    }
+    #page-cabin-inner {
+      width: 100%; height: 100%; display: flex;
+      align-items: center; justify-content: flex-start;
+      padding-left: 8%; position: relative;
+    }
+    #cabin-building-title {
+      position: fixed; white-space: nowrap;
+      font-family: 'Sriracha', cursive; font-size: 1.8rem; font-weight: bold;
+      color: #1a0e00; letter-spacing: 0.06em;
+      -webkit-text-stroke: 0.4px rgba(120,60,10,0.75);
+      text-shadow: 1px 1px 0 rgba(200,140,40,0.6), 0 2px 8px rgba(100,60,0,0.45);
+      pointer-events: none;
+    }
+    #cabin-panel {
+      position: fixed; right: -420px; top: 8%; bottom: 12%; width: 400px;
+      display: none; background: rgba(20,10,3,0.88);
+      border: 2px solid rgba(200,150,40,0.7); border-radius: 10px;
+      padding: 20px 24px; z-index: 46;
+      transition: right 0.4s cubic-bezier(0.22,1,0.36,1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+    #cabin-panel.open { right: 9%; }
+    #cabin-panel.exit { right: -420px; transition: right 0.3s cubic-bezier(0.55,0,1,0.45); }
+    #cabin-panel h2 {
+      font-family: 'Sriracha', cursive; font-size: 1.3rem; color: #f5d87a;
+      margin-bottom: 10px; border-bottom: 1px solid rgba(200,150,40,0.4);
+      padding-bottom: 8px; text-align: center;
+    }
+    #cabin-img-grid { display: flex; flex-direction: column; gap: 3px; margin-top: 8px; }
+    #cabin-building-img {
+      width: 70%; max-height: 70vh; object-fit: contain; display: block;
+      filter: brightness(1.1) contrast(1.15) saturate(1.1) drop-shadow(0 8px 32px rgba(60,30,0,0.75));
+      border-radius: 4px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 50%, black 25%, transparent 85%);
+      mask-image: radial-gradient(ellipse 70% 65% at 50% 50%, black 25%, transparent 85%);
+    }
+    #cabin-back-btn {
+      position: fixed; bottom: 24px; left: 24px; z-index: 47;
+      font-family: 'Sriracha', cursive; font-size: 1rem; color: #1a0e00;
+      background: rgba(200,150,40,0.85); border: 2px solid rgba(200,150,40,0.9);
+      border-radius: 8px; padding: 8px 20px; cursor: pointer;
+    }
+    #cabin-back-btn:hover { background: rgba(255,220,100,0.95); }
+
     /* Page 2 */
     #page2 {
       position: fixed;
@@ -1039,6 +1440,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center top;
       display: block;
       filter: brightness(0.9) contrast(1.1);
     }
@@ -1148,9 +1550,9 @@
   <div id="page0">
     <img class="pirate-pin go-btn" id="pirate-pin-1" src="pirate_PNG17.png" alt="pin" style="left:43%;top:52%;" draggable="false"/>
     <div class="pirate-pin-label" id="pirate-label-1" style="left:43%;top:52%;"></div>
-    <img class="pirate-pin" id="pirate-pin-2" src="pirate_PNG17.png" alt="pin" style="left:68%;top:41%;" draggable="false"/>
+    <img class="pirate-pin go-btn" id="pirate-pin-2" src="pirate_PNG17.png" alt="pin" style="left:68%;top:41%;" draggable="false"/>
     <div class="pirate-pin-label" id="pirate-label-2" style="left:68%;top:41%;"></div>
-    <img class="pirate-pin go-btn" id="pirate-pin-0" src="pirate_PNG17.png" alt="pin" style="left:78%;top:55%;" draggable="false"/>
+<img class="pirate-pin go-btn" id="pirate-pin-0" src="pirate_PNG17.png" alt="pin" style="left:78%;top:55%;" draggable="false"/>
     <div class="pirate-pin-label" id="pirate-label-0" style="left:78%;top:55%;"></div>
 
     <!-- Pirate fish mascot -->
@@ -1314,6 +1716,19 @@
   <div id="fade-overlay"></div>
 
   <!-- Page 3 -->
+  <!-- Page Cabin -->
+  <div id="page-cabin">
+    <div id="page-cabin-inner">
+      <div id="cabin-building-title">บ้านฟ้า</div>
+      <img id="cabin-building-img" src="44.png" alt="building" />
+    </div>
+  </div>
+  <div id="cabin-panel">
+    <h2>บุคลากรบ้านฟ้า</h2>
+    <div id="cabin-img-grid"></div>
+  </div>
+  <button id="cabin-back-btn" style="display:none;">&#8592;</button>
+
   <div id="page3">
     <div id="p3-bg"></div>
     <div id="p3-grid"></div>
@@ -1371,6 +1786,70 @@
     </div>
   </div>
   <button id="page3-back-btn">&#8592;</button>
+
+  <!-- Page 4 — อาคารเรียน -->
+  <div id="page4">
+    <div id="page4-inner">
+      <div id="p4-building-title">อาคารเรียน</div>
+      <img id="p4-building-img" src="28.png" alt="building" />
+    </div>
+  </div>
+
+  <!-- Page 8 -->
+  <div id="page8">
+    <div id="page8-inner">
+      <div id="p8-building-title">โรงเพาะฟัก</div>
+      <img id="p8-building-img" src="32.png" alt="building" />
+    </div>
+  </div>
+  <div id="p8-panel">
+    <h2>โรงเพาะฟัก</h2>
+    <div id="p8-img-grid"></div>
+  </div>
+
+  <!-- Page 7 -->
+  <div id="page7">
+    <div id="page7-inner">
+      <div id="p7-building-title">ตึกแลป</div>
+      <img id="p7-building-img" src="31.png" alt="building" />
+    </div>
+  </div>
+  <div id="p7-panel">
+    <h2>ห้องแลป</h2>
+    <div id="p7-img-grid"></div>
+  </div>
+
+  <!-- Page 4 popup panel -->
+  <div id="p4-panel">
+    <h2>ชั้น 1 อาคารเรียน</h2>
+    <div id="p4-img-grid"></div>
+  </div>
+
+  <!-- Page 6 -->
+  <div id="page6">
+    <div id="page6-inner">
+      <div id="p6-building-title">ตึกแลป</div>
+      <img id="p6-building-img" src="30.png" alt="building" />
+    </div>
+  </div>
+  <div id="p6-panel">
+    <h2>ห้องแลป</h2>
+    <div id="p6-img-grid"></div>
+  </div>
+
+  <!-- Page 5 — ตึกแลป -->
+  <div id="page5">
+    <div id="page5-inner">
+      <div id="p5-building-title">ตึกแลป</div>
+      <img id="p5-building-img" src="29.png" alt="building" />
+    </div>
+  </div>
+
+  <!-- Page 5 popup panel -->
+  <div id="p5-panel">
+    <h2>ห้องแลป</h2>
+    <div id="p5-img-grid"></div>
+  </div>
 
   <!-- Page 2 -->
   <div id="page2">
@@ -1442,8 +1921,8 @@
         <div class="pp-stat-bar-track"><div id="pp-bar-3" class="pp-stat-bar-fill" style="width:75%;background:linear-gradient(90deg,#ffb3b3,#b71c1c);box-shadow:0 0 12px rgba(255,23,68,0.7);"><span id="pp-val-3" class="pp-stat-val">75</span></div></div>
       </div>
 
-      <hr class="pp-divider" style="margin-top:10px;"/>
-      <div class="pp-section-title">ที่ตั้ง</div>
+      <hr class="pp-divider map-divider" style="margin-top:10px;"/>
+      <div class="pp-section-title map-title">ที่ตั้ง</div>
       <div id="pp-map-frame">
         <div id="pp-map-placeholder">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(0,180,255,0.4)" stroke-width="1.5">
@@ -1453,10 +1932,44 @@
           <span>MAP PENDING</span>
         </div>
       </div>
+
+      <!-- p4-layout: vertical bars + map -->
+      <div id="pp-bottom-row">
+        <div id="pp-vbars">
+          <div class="pp-vbar-col">
+            <div class="pp-vbar-pct" id="pp-vval-1">0%</div>
+            <div class="pp-vbar-track">
+              <div id="pp-vbar-1" class="pp-vbar-fill" style="background:linear-gradient(0deg,#00c853,#b9ffd8);box-shadow:0 0 12px rgba(0,230,118,0.7);"></div>
+            </div>
+            <div class="pp-vbar-label">ความ<br>เชี่ยวชาญ</div>
+          </div>
+          <div class="pp-vbar-col">
+            <div class="pp-vbar-pct" id="pp-vval-2">0%</div>
+            <div class="pp-vbar-track">
+              <div id="pp-vbar-2" class="pp-vbar-fill" style="background:linear-gradient(0deg,#ff8f00,#fff5b0);box-shadow:0 0 12px rgba(255,200,0,0.7);"></div>
+            </div>
+            <div class="pp-vbar-label" id="pp-vlabel-2">ความโหด<br>ของวิชา</div>
+          </div>
+          <div class="pp-vbar-col">
+            <div class="pp-vbar-pct" id="pp-vval-3">0%</div>
+            <div class="pp-vbar-track">
+              <div id="pp-vbar-3" class="pp-vbar-fill" style="background:linear-gradient(0deg,#b71c1c,#ffb3b3);box-shadow:0 0 12px rgba(255,23,68,0.7);"></div>
+            </div>
+            <div class="pp-vbar-label" id="pp-vlabel-3">ความโหด<br>ของเกรด</div>
+          </div>
+        </div>
+        <div id="pp-map-frame-p4">
+          <div id="pp-map-placeholder-p4" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:rgba(0,180,255,0.35);font-size:0.7rem;letter-spacing:0.12em;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(0,180,255,0.4)" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <span>MAP PENDING</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- RIGHT SIDE -->
     <div id="person-right">
+      <div id="pp-speech-bubble" style="display:none;"></div>
       <div id="person-portrait-placeholder">PORTRAIT PENDING</div>
       <img id="person-portrait-img" src="" alt="" style="display:none;" draggable="false"/>
     </div>
@@ -1579,6 +2092,9 @@
     document.getElementById('pirate-pin-1').addEventListener('click', function() {
       goTo3D('3D-1.glb');
     });
+    document.getElementById('pirate-pin-2').addEventListener('click', function() {
+      goTo3D('CABIN.glb');
+    });
 
     // pirate fish bubble toggle with word-by-word reveal
     const piratefish = document.getElementById('pirate-fish');
@@ -1671,12 +2187,14 @@
 
     window.openPersonPage = function(src, name, role, floor) {
       _lastFloor = floor || null;
-      const prefixes = { 'อภินันท์': 'รศ.ดร.', 'ชนกันต์': 'รศ.ดร.', 'อุดมลักษณ์': 'ผศ.ดร.', 'โดม': 'อ.ดร.', 'จงกล': 'รศ.ดร.', 'ขจรเกียรติ์': 'อ.ดร.', 'จอมสุดา': 'ผศ.ดร.', 'สุดาพร': 'ผศ.ดร.', 'ดารชาต์': 'ผศ.ดร.', 'นิสรา': 'รศ.ดร.', 'วาธิณี': 'อ.ดร.', 'กานต์': 'อ.ดร.', 'นงพงา': 'อ.ดร.' };
+      const prefixes = { 'อภินันท์': 'รศ.ดร.', 'ชนกันต์': 'รศ.ดร.', 'อุดมลักษณ์': 'ผศ.ดร.', 'โดม': 'อ.ดร.', 'จงกล': 'รศ.ดร.', 'ขจรเกียรติ์': 'อ.ดร.', 'จอมสุดา': 'ผศ.ดร.', 'สุดาพร': 'ผศ.ดร.', 'ดารชาต์': 'ผศ.ดร.', 'นิสรา': 'รศ.ดร.', 'วาธิณี': 'อ.ดร.', 'กานต์': 'อ.ดร.', 'นงพงา': 'อ.ดร.', 'จิราพรR': 'ผศ.ดร.', 'อานุภาพ': 'ผศ.ดร.', 'เทพพิทักษ์': 'ดร.', 'ภัสสร์พัณณ์': 'ดร.' };
       const prefix = prefixes[name] ? prefixes[name] + ' ' : '';
-      document.getElementById('pp-name').textContent    = prefix + (name || '—');
-      const nicknames = { 'จรรยา': 'ภูคำวงศ์ (พี่แขก)', 'จิราพร': 'มอญเลิศ (พี่หน่อย)', 'กัลยารัตน์': 'วงศ์แก้ว (พี่เอ๋)', 'ศิรินยา': 'อ้นแก้ว (พี่นุ๊ก)', 'เอกรินทร์': 'แสนแก้ว (พี่เปรม)' };
+      const displayNames = { 'จิราพรR': 'จิราพร' };
+      const displayName = displayNames[name] || name;
+      document.getElementById('pp-name').textContent    = prefix + (displayName || '—');
+      const nicknames = { 'จรรยา': 'ภูคำวงศ์ (พี่แขก)', 'จิราพร': 'มอญเลิศ (พี่หน่อย)', 'กัลยารัตน์': 'วงศ์แก้ว (พี่เอ๋)', 'ศิรินยา': 'อ้นแก้ว (พี่นุ๊ก)', 'เอกรินทร์': 'แสนแก้ว (พี่เปรม)', 'อัจฉรา': 'เสาวฤทธิ์ (พี่นุ้ย)', 'อานุภาพ': 'วรรณคนาพล (อ.ดอย)', 'เกษม': 'สมบัติ (พี่ต๊อก)', 'พงษ์ศักดิ์': 'กองคำ (พี่เอ)', 'พิไลวรรณ': 'จันต๊ะตา (พี่เก๋)', 'อรพรรณ': 'พรหมใจ (พี่แนน)', 'วีระวัฒน์': 'ฟังเย็น (พี่วัฒ)', 'น้ำเพชร': 'ประกอบศิลป์ (พี่นิ่ม)', 'จิราพรR': 'โรจน์ทินกร (อ.จิ)', 'เทพพิทักษ์': 'บุญทา (พี่คิด)', 'ณัฏฐกานต์': 'มุกดาจตุรพักตร์ (พี่โอ๋)', 'ประจันทร์': 'วงค์แสง (พี่อ้วน)', 'ดุสิต': 'ดวงบาล (พี่ชาย)', 'วินัย': 'การะเกตุ (พี่ขาว)', 'ภัสสร์พัณณ์': 'ศรีวิชัย (พี่แพท)' };
       document.getElementById('pp-surname').textContent = (nicknames[name] || role) || '—';
-      const supportStaff = ['จรรยา','จิราพร','กัลยารัตน์','ศิรินยา','เอกรินทร์'];
+      const supportStaff = ['จรรยา','จิราพร','กัลยารัตน์','ศิรินยา','เอกรินทร์','อัจฉรา','เกษม','พงษ์ศักดิ์','พิไลวรรณ','อรพรรณ','วีระวัฒน์','น้ำเพชร'];
       const specialTitles = {
         'อภินันท์': 'คณบดี คณะเทคโนโลยีการประมงและทรัพยากรทางน้ำ',
         'ชนกันต์': 'รองคณบดี ฝ่ายวิชาการและประกันคุณภาพการศึกษา',
@@ -1687,8 +2205,22 @@
         'จิราพร': 'หัวหน้างานบริหารและธุรการ',
         'ศิรินยา': 'นักวิชาการศึกษา',
         'เอกรินทร์': 'ผู้ปฏิบัติงานบริหาร',
+        'อัจฉรา': 'หัวหน้างานบริการการศึกษาและกิจการนักศึกษา',
+        'เกษม': 'นักบริหารงานอาคารสถานที่',
+        'พงษ์ศักดิ์': 'ผู้ปฏิบัติงานการเกษตร',
+        'พิไลวรรณ': 'รักษาการแทนหัวหน้างานคลังและพัสดุ',
+        'อรพรรณ': 'นักวิชาการเงินและบัญชี',
+        'วีระวัฒน์': 'นักวิชาการคอมพิวเตอร์',
+        'น้ำเพชร': 'นักวิทยาศาสตร์',
+        'จิราพรR': 'ผู้ช่วยศาสตราจารย์',
+        'เทพพิทักษ์': 'นักวิทยาศาสตร์',
+        'ณัฏฐกานต์': 'นักวิทยาศาสตร์',
+        'ประจันทร์': 'ผู้ปฏิบัติงานประมง',
+        'ดุสิต': 'ผู้ปฏิบัติงานประมง',
+        'วินัย': 'ผู้ปฏิบัติงานวิทยาศาสตร์',
+        'ภัสสร์พัณณ์': 'นักวิทยาศาสตร์',
       };
-      const academicTitles = { 'จงกล': 'รองศาสตราจารย์', 'ขจรเกียรติ์': 'อาจารย์', 'จอมสุดา': 'ผู้ช่วยศาสตราจารย์', 'สุดาพร': 'ผู้ช่วยศาสตราจารย์', 'ดารชาต์': 'ผู้ช่วยศาสตราจารย์', 'นิสรา': 'รองศาสตราจารย์', 'วาธิณี': 'อาจารย์', 'กานต์': 'อาจารย์', 'นงพงา': 'อาจารย์' };
+      const academicTitles = { 'จงกล': 'รองศาสตราจารย์', 'ขจรเกียรติ์': 'อาจารย์', 'จอมสุดา': 'ผู้ช่วยศาสตราจารย์', 'สุดาพร': 'ผู้ช่วยศาสตราจารย์', 'ดารชาต์': 'ผู้ช่วยศาสตราจารย์', 'นิสรา': 'รองศาสตราจารย์', 'วาธิณี': 'อาจารย์', 'กานต์': 'อาจารย์', 'นงพงา': 'อาจารย์', 'อานุภาพ': 'ผู้ช่วยศาสตราจารย์' };
       document.getElementById('pp-role').textContent = specialTitles[name] || academicTitles[name] || (supportStaff.includes(name) ? 'สายสนับสนุน' : 'สายวิชาการ');
 
       const expertises = {
@@ -1701,6 +2233,30 @@
         'กัลยารัตน์': 'งานนโยบายและแผนคณะ, ประกันคุณภาพ',
         'ศิรินยา': 'ประกันคุณภาพการศึกษา',
         'เอกรินทร์': 'เอกสาร electronic, พิธีกรรมทางศาสนา',
+        'จงกล': 'สาหร่ายและแพลงก์ตอน, หลักการเพาะเลี้ยงสัตว์น้ำ, การเลี้ยงผำ',
+        'ขจรเกียรติ์': 'สาหร่ายและแพลงก์ตอน, นิเวศวิทยาทางน้ำ, ปลาไหลนา',
+        'จอมสุดา': 'การปรับปรุงพันธุ์สัตว์น้ำ, การเลี้ยงปลาชะโอน',
+        'สุดาพร': 'การผลิตอาหารสัตว์น้ำ',
+        'ดารชาต์': 'การจัดการธุรกิจสัตว์น้ำ, การตลาด',
+        'นิสรา': 'การปรับปรุงพันธุ์สัตว์น้ำ, การเลี้ยงปลานิลในระบบ biofloc',
+        'วาธิณี': 'การแปรรูปผลิตภัณฑ์สัตว์น้ำ',
+        'กานต์': 'การจัดการธุรกิจสัตว์น้ำ, การตลาด, โรคสัตว์น้ำ',
+        'นงพงา': 'การแปรรูปผลิตภัณฑ์สัตว์น้ำ',
+        'อัจฉรา': 'กิจกรรมพัฒนานักศึกษา, พิธีกร, หลักสูตร, ระเบียบการศึกษา',
+        'อานุภาพ': 'หลักการเพาะเลี้ยงสัตว์น้ำ, การเก็บรักษาน้ำเชื้อ',
+        'เกษม': 'อาคารและสถานที่ของคณะฯ',
+        'พงษ์ศักดิ์': 'อาคารและสถานที่ของคณะฯ',
+        'พิไลวรรณ': 'งานพัสดุ',
+        'อรพรรณ': 'งานการเงินและบัญชี',
+        'วีระวัฒน์': 'งาน IT คณะฯ',
+        'น้ำเพชร': 'คุณภาพน้ำ',
+        'จิราพรR': 'เทคโนโลยีชีวภาพ สารสกัด',
+        'เทพพิทักษ์': 'เพาะเลี้ยงปลาทุกชนิด กบ เขียด หนอนแมลงวันลาย สาหร่ายและแพลงก์ตอน',
+        'ณัฏฐกานต์': 'ชีววิทยาปลา การเลี้ยงกุ้งฝอย',
+        'ประจันทร์': 'งานฟาร์มสัตว์น้ำ การเพาะพันธุ์ปลาน้ำจืด',
+        'ดุสิต': 'งานฟาร์มสัตว์น้ำ การเพาะพันธุ์ปลาน้ำจืด',
+        'วินัย': 'การเพาะเลี้ยงสัตว์น้ำ',
+        'ภัสสร์พัณณ์': 'การแปรรูป',
       };
       const expertiseText = expertises[name] || '';
       (function typeExpertise() {
@@ -1720,18 +2276,40 @@
         'อภินันท์': { s1: 100, s2: 110, s3: 120 },
         'อุดมลักษณ์': { s1: 100, s2: 75, s3: 85 },
         'โดม': { s1: 100, s2: 35, s3: 20 },
-        'จงกล': { s1: 100, s2: 75, s3: 65 },
-        'ขจรเกียรติ์': { s1: 100, s2: 85, s3: 50 },
+        'จงกล': { s1: 100, s2: 70, s3: 50 },
+        'ขจรเกียรติ์': { s1: 100, s2: 70, s3: 40 },
         'จรรยา': { s1: 100, s2: 80, s3: 100 },
         'จิราพร': { s1: 100, s2: 90, s3: 100 },
         'กัลยารัตน์': { s1: 100, s2: 90, s3: 100 },
         'ศิรินยา': { s1: 100, s2: 90, s3: 100 },
         'เอกรินทร์': { s1: 100, s2: 80, s3: 100 },
+        'จอมสุดา': { s1: 100, s2: 80, s3: 70 },
+        'สุดาพร': { s1: 100, s2: 70, s3: 40 },
+        'ดารชาต์': { s1: 100, s2: 60, s3: 70 },
+        'นิสรา': { s1: 100, s2: 80, s3: 70 },
+        'วาธิณี': { s1: 100, s2: 60, s3: 70 },
+        'กานต์': { s1: 100, s2: 50, s3: 30 },
+        'นงพงา': { s1: 100, s2: 60, s3: 70 },
+        'อัจฉรา': { s1: 100, s2: 80, s3: 70 },
+        'อานุภาพ': { s1: 100, s2: 60, s3: 40 },
+        'เกษม': { s1: 100, s2: 60, s3: 90 },
+        'พงษ์ศักดิ์': { s1: 100, s2: 60, s3: 90 },
+        'พิไลวรรณ': { s1: 100, s2: 90, s3: 90 },
+        'อรพรรณ': { s1: 100, s2: 90, s3: 90 },
+        'วีระวัฒน์': { s1: 100, s2: 90, s3: 90 },
+        'น้ำเพชร': { s1: 100, s2: 80, s3: 80 },
+        'จิราพรR': { s1: 100, s2: 80, s3: 80 },
+        'เทพพิทักษ์': { s1: 100, s2: 80, s3: 60 },
+        'ณัฏฐกานต์': { s1: 100, s2: 90, s3: 90 },
+        'ประจันทร์': { s1: 100, s2: 80, s3: 90 },
+        'ดุสิต': { s1: 100, s2: 80, s3: 90 },
+        'วินัย': { s1: 100, s2: 80, s3: 90 },
+        'ภัสสร์พัณณ์': { s1: 100, s2: 60, s3: 70 },
       };
       const pl = powerLevels[name] || { s1: 100, s2: 65, s3: 75 };
-      const supportStaffLabels = ['จรรยา','จิราพร','กัลยารัตน์','ศิรินยา','เอกรินทร์'];
-      document.getElementById('pp-label-2').textContent = supportStaffLabels.includes(name) ? 'ความง่ายในการพบเจอ' : 'ความโหดของวิชา';
-      document.getElementById('pp-label-3').textContent = supportStaffLabels.includes(name) ? 'ระดับความใจดี' : 'ความโหดของเกรด';
+      const supportStaffLabels = ['จรรยา','จิราพร','กัลยารัตน์','ศิรินยา','เอกรินทร์','อัจฉรา','เกษม','พงษ์ศักดิ์','พิไลวรรณ','อรพรรณ','วีระวัฒน์','ประจันทร์','ดุสิต','วินัย','ภัสสร์พัณณ์'];
+      document.getElementById('pp-label-2').textContent = (supportStaffLabels.includes(name) || floor === 'cabin') ? 'ความง่ายในการพบเจอ' : 'ความโหดของวิชา';
+      document.getElementById('pp-label-3').textContent = (supportStaffLabels.includes(name) || floor === 'cabin') ? 'ระดับความใจดี' : 'ความโหดของเกรด';
       document.getElementById('pp-bar-1').style.width = '0%';
       document.getElementById('pp-val-1').textContent = '0%';
       document.getElementById('pp-bar-2').style.width = '0%';
@@ -1761,7 +2339,7 @@
       animateBar('pp-bar-2', 'pp-val-2', pl.s2, charDelay + 3800);
       animateBar('pp-bar-3', 'pp-val-3', pl.s3, charDelay + 7600);
 
-      const portraits = { 'อภินันท์': '8-2.png', 'ชนกันต์': '9-2.png', 'อุดมลักษณ์': '10-1.png', 'โดม': '11-1.png', 'จรรยา': '12-1.png', 'จิราพร': '13-1.png', 'กัลยารัตน์': '14-2.png', 'ศิรินยา': '15-1.png', 'เอกรินทร์': '16-1.png', 'จงกล': '17-1.png', 'ขจรเกียรติ์': '18-1.png', 'จอมสุดา': '19-1.png', 'สุดาพร': '20-1.png', 'ดารชาต์': '21-1.png', 'นิสรา': '22-1.png', 'วาธิณี': '23-1.png', 'กานต์': '24-1.png', 'นงพงา': '25-1.png' };
+      const portraits = { 'อภินันท์': '8-2.png', 'ชนกันต์': '9-2.png', 'อุดมลักษณ์': '10-1.png', 'โดม': '11-1.png', 'จรรยา': '12-1.png', 'จิราพร': '13-1.png', 'กัลยารัตน์': '14-2.png', 'ศิรินยา': '15-1.png', 'เอกรินทร์': '16-1.png', 'จงกล': '17-1.png', 'ขจรเกียรติ์': '18-1.png', 'จอมสุดา': '19-1.png', 'สุดาพร': '20-1.png', 'ดารชาต์': '21-1.png', 'นิสรา': '22-1.png', 'วาธิณี': '23-1.png', 'กานต์': '24-1.png', 'นงพงา': '25-1.png', 'อัจฉรา': '33-1.png', 'อานุภาพ': '34-1.png', 'เกษม': '35-1.png', 'พงษ์ศักดิ์': '36-1.png', 'พิไลวรรณ': '37-1.png', 'อรพรรณ': '38-1.png', 'วีระวัฒน์': '39-1.png', 'น้ำเพชร': '40-1.png', 'จิราพรR': '41-1.png', 'เทพพิทักษ์': '42-1.png', 'ณัฏฐกานต์': '43-1.png', 'ประจันทร์': '46-1.png', 'ดุสิต': '47-1.png', 'วินัย': '48-1.png', 'ภัสสร์พัณณ์': '49-1.png' };
       const portraitImg = document.getElementById('person-portrait-img');
       if (portraits[name]) {
         portraitImg.src = portraits[name];
@@ -1771,11 +2349,63 @@
         portraitImg.style.display = 'none';
       }
 
-      const mapNames = ['อภินันท์','ชนกันต์','อุดมลักษณ์','โดม','จรรยา','จิราพร','กัลยารัตน์','ศิรินยา','เอกรินทร์'];
-      const lockedPins = { 'อภินันท์': { x: 32, y: 25 }, 'ชนกันต์': { x: 53, y: 27 }, 'อุดมลักษณ์': { x: 63, y: 27 }, 'โดม': { x: 43, y: 27 }, 'จรรยา': { x: 71, y: 27 }, 'จิราพร': { x: 70, y: 66 }, 'กัลยารัตน์': { x: 65, y: 81 }, 'ศิรินยา': { x: 73, y: 83 }, 'เอกรินทร์': { x: 83, y: 71 } };
-      const mapFrame = document.getElementById('pp-map-frame');
+      const speechBubbleTexts = { 'เทพพิทักษ์': 'พี่หล่อไหมน้อง' };
+      const bubble = document.getElementById('pp-speech-bubble');
+      if (speechBubbleTexts[name]) {
+        bubble.textContent = speechBubbleTexts[name];
+        bubble.style.display = 'block';
+      } else {
+        bubble.style.display = 'none';
+      }
+
+      const mapNames = ['อภินันท์','ชนกันต์','อุดมลักษณ์','โดม','จรรยา','จิราพร','กัลยารัตน์','ศิรินยา','เอกรินทร์','จงกล','ขจรเกียรติ์','จอมสุดา','สุดาพร','ดารชาต์','นิสรา','วาธิณี','กานต์','นงพงา','ประเสริฐ','ประจันทร์','ดุสิต','วินัย','ภัสสร์พัณณ์','จิราพรR','น้ำเพชร','เทพพิทักษ์','ณัฏฐกานต์'];
+      const map26_3Names = ['จงกล','ขจรเกียรติ์','จอมสุดา','สุดาพร','ดารชาต์','นิสรา','วาธิณี'];
+      const map26_5Names = ['กานต์','นงพงา'];
+      const map26_8Names = ['จิราพรR','น้ำเพชร','เทพพิทักษ์','ณัฏฐกานต์'];
+      const map26_6Names = ['จงกล','ขจรเกียรติ์','จอมสุดา','สุดาพร','ดารชาต์','นิสรา','วาธิณี'];
+      const lockedPins = { 'อภินันท์': { x: 32, y: 25 }, 'ชนกันต์': { x: 53, y: 27 }, 'อุดมลักษณ์': { x: 63, y: 27 }, 'โดม': { x: 43, y: 27 }, 'จรรยา': { x: 71, y: 27 }, 'จิราพร': { x: 70, y: 66 }, 'กัลยารัตน์': { x: 65, y: 81 }, 'ศิรินยา': { x: 73, y: 83 }, 'เอกรินทร์': { x: 83, y: 71 }, 'จงกล': { x: 72, y: 17 }, 'ขจรเกียรติ์': { x: 83, y: 17 }, 'จอมสุดา': { x: 34, y: 16 }, 'สุดาพร': { x: 61, y: 18 }, 'ดารชาต์': { x: 44, y: 20 }, 'นิสรา': { x: 51, y: 84 }, 'วาธิณี': { x: 66, y: 82 }, 'กานต์': { x: 22, y: 28 }, 'นงพงา': { x: 37, y: 26 }, 'อัจฉรา': { x: 20, y: 62 }, 'อานุภาพ': { x: 38, y: 61 }, 'เกษม': { x: 36, y: 70 }, 'พงษ์ศักดิ์': { x: 36, y: 70 }, 'พิไลวรรณ': { x: 18, y: 87 }, 'อรพรรณ': { x: 34, y: 87 }, 'วีระวัฒน์': { x: 39, y: 79 }, 'น้ำเพชร': { x: 50, y: 50 }, 'จิราพรR': { x: 50, y: 50 }, 'เทพพิทักษ์': { x: 50, y: 50 }, 'ประจันทร์': { x: 57, y: 39 }, 'ดุสิต': { x: 57, y: 42 }, 'วินัย': { x: 53, y: 16 }, 'ภัสสร์พัณณ์': { x: 42, y: 16 } };
+      // toggle p4-layout
+      const isP4 = floor === 'p4' || floor === 'p8-p4';
+      if (isP4) {
+        personPage.classList.add('p4-layout');
+        // animate vertical bars
+        ['pp-vbar-1','pp-vbar-2','pp-vbar-3'].forEach(id => {
+          const b = document.getElementById(id);
+          if (b) { b.style.transition = 'none'; b.style.height = '0%'; }
+        });
+        ['pp-vval-1','pp-vval-2','pp-vval-3'].forEach(id => {
+          const v = document.getElementById(id);
+          if (v) v.textContent = '0%';
+        });
+        document.getElementById('pp-vlabel-2').innerHTML = supportStaffLabels.includes(name) ? 'ความง่าย<br>พบเจอ' : 'ความโหด<br>ของวิชา';
+        document.getElementById('pp-vlabel-3').innerHTML = supportStaffLabels.includes(name) ? 'ระดับ<br>ความใจดี' : 'ความโหด<br>ของเกรด';
+        function animateVBar(barId, valId, target, delay) {
+          setTimeout(function() {
+            const bar = document.getElementById(barId);
+            const val = document.getElementById(valId);
+            if (!bar || !val) return;
+            bar.style.transition = 'height 3.5s cubic-bezier(0.25,0.8,0.25,1)';
+            bar.style.height = Math.min(target, 100) + '%';
+            let start = null;
+            function step(ts) {
+              if (!start) start = ts;
+              const progress = Math.min((ts - start) / 3500, 1);
+              val.textContent = Math.round(progress * target) + '%';
+              if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+          }, delay);
+        }
+        animateVBar('pp-vbar-1', 'pp-vval-1', pl.s1, charDelay);
+        animateVBar('pp-vbar-2', 'pp-vval-2', pl.s2, charDelay + 3800);
+        animateVBar('pp-vbar-3', 'pp-vval-3', pl.s3, charDelay + 7600);
+      } else {
+        personPage.classList.remove('p4-layout');
+      }
+
+      const mapFrame = isP4 ? document.getElementById('pp-map-frame-p4') : document.getElementById('pp-map-frame');
       const pinPositions = {};
-      if (mapNames.includes(name)) {
+      if (floor === 'p4' || floor === 'p8-p4' || mapNames.includes(name)) {
         mapFrame.innerHTML = `
 <style>
 @keyframes mapGlowPulse {
@@ -1829,10 +2459,10 @@
 </div>`;
         const mapDelay = charDelay + 7600 + 3500;
         setTimeout(function() {
-          const canvas = document.getElementById('pp-map-canvas');
+          const canvas = mapFrame.querySelector('#pp-map-canvas') || document.getElementById('pp-map-canvas');
           if (!canvas) return;
           const sourceImg = new Image();
-          sourceImg.src = '26-2.png';
+          sourceImg.src = name === 'ประเสริฐ' ? '26-7.png' : floor === 'cabin' ? '0.png' : floor === 'p8-p4' ? '50.png' : floor === 'p4' ? '26-6.png' : map26_8Names.includes(name) ? '26-8.png' : map26_5Names.includes(name) ? '26-5.png' : map26_3Names.includes(name) ? '26-4.png' : '26-2.png';
           sourceImg.onload = function() {
             // รอ 1 frame ให้ layout เสร็จก่อนวัดขนาด
             requestAnimationFrame(function() {
@@ -1849,7 +2479,7 @@
             const imgData = octx.getImageData(0, 0, W, H);
 
             const ctx = canvas.getContext('2d');
-            canvas.style.opacity = '1';
+            canvas.style.opacity = '0';
             const scanLabel = document.getElementById('pp-map-scan-label');
             if (scanLabel) scanLabel.style.display = 'none';
 
@@ -1880,6 +2510,7 @@
               const target = Math.floor(eased * total);
 
               if (target > drawn) {
+                if (drawn === 0) canvas.style.opacity = '1';
                 const src = imgData.data;
                 for (let k = drawn; k < target; k++) {
                   const bi = order[k];
@@ -1917,13 +2548,15 @@
 
           function addMapPin() {
             setTimeout(function() {
-              const wrap = document.getElementById('pp-map-wrap');
+              const wrap = mapFrame.querySelector('[id="pp-map-wrap"]') || document.getElementById('pp-map-wrap');
               if (!wrap) return;
+              wrap.querySelectorAll('.map-pin').forEach(p => p.remove());
               const locked = lockedPins[name];
               const saved = pinPositions[name];
               const pin = document.createElement('div');
               pin.className = 'map-pin';
               pin.id = 'pp-map-pin';
+              pin.style.zIndex = '20';
               const px = locked ? locked.x : (saved ? saved.x : 50);
               const py = locked ? locked.y : (saved ? saved.y : 50);
               pin.style.left = px + '%';
@@ -1972,8 +2605,9 @@
       personPage.addEventListener('transitionend', function handler() {
         personPage.removeEventListener('transitionend', handler);
         personPage.style.display = 'none';
+        personPage.classList.remove('p4-layout');
         personBackBtn.style.display = 'none';
-        if (_lastFloor && window._openFloorPanel) {
+        if (_lastFloor && _lastFloor !== 'p4' && window._openFloorPanel) {
           window._openFloorPanel(_lastFloor);
         }
       });
@@ -2081,11 +2715,28 @@
     pinEls.forEach(el => el.style.display = 'none');
     // pin index 4 = label "1" — คลิกได้ → ไป Page 2
     pinEls[4].classList.add('clickable');
+    // pin index 5 = label "2" — คลิกได้ → ไป Page 4
+    pinEls[5].classList.add('clickable');
+    // pin index 0 = label "3" — คลิกได้ → ไป Page 5
+    pinEls[0].classList.add('clickable');
+    // pin index 1 = label "4" — คลิกได้ → ไป Page 6
+    pinEls[1].classList.add('clickable');
+    // pin index 2 = label "5" — คลิกได้ → ไป Page 7
+    pinEls[2].classList.add('clickable');
+    // pin index 3 = label "6" — คลิกได้ → ไป Page 8
+    pinEls[3].classList.add('clickable');
 
     // pin พิเศษสำหรับ 3D-1.glb (ไม่มีเลข)
     const pin3D1El = makePinSVG('x', null);
     pin3D1El.style.display = 'none';
     const pin3D1Point = new THREE.Vector3();
+
+    // pin พิเศษสำหรับ CABIN.glb
+    const pinCabinEl = makePinSVG('cabin', null);
+    pinCabinEl.style.display = 'none';
+    pinCabinEl.classList.add('clickable');
+    const pinCabinPoint = new THREE.Vector3();
+    let pinCabinEnabled = false;
 
     const projected = new THREE.Vector3();
     const pinScreenPos = pinPoints.map(() => ({ x: 0, y: 0 }));
@@ -2117,6 +2768,17 @@
         pin3D1El.style.display = visible ? 'block' : 'none';
         pin3D1El.style.left = x + 'px';
         pin3D1El.style.top  = y + 'px';
+      }
+      // pin พิเศษของ CABIN.glb
+      if (!pinCabinEnabled) { pinCabinEl.style.display = 'none'; }
+      else {
+        projected.copy(pinCabinPoint).project(camera);
+        const x = (projected.x * 0.5 + 0.5) * innerWidth;
+        const y = (-projected.y * 0.5 + 0.5) * innerHeight;
+        const visible = projected.z < 1;
+        pinCabinEl.style.display = visible ? 'block' : 'none';
+        pinCabinEl.style.left = x + 'px';
+        pinCabinEl.style.top  = y + 'px';
       }
     }
 
@@ -2173,6 +2835,8 @@
       // final: แยกตาม GLB
       const finalPos = (glbFile === '3D-1.glb')
         ? new THREE.Vector3(0, maxDim * 0.28, maxDim * 0.55)
+        : (glbFile === 'CABIN.glb')
+        ? new THREE.Vector3(maxDim * 1.0, maxDim * 0.8, maxDim * 1.3)
         : new THREE.Vector3(maxDim * 0.1, maxDim * 0.25, maxDim * -0.75);
 
       camera.position.copy(startPos);
@@ -2215,10 +2879,17 @@
 
       if (glbFile === '3D-1.glb') {
         pinsEnabled = false;
+        pinCabinEnabled = false;
         pin3D1Point.set(19.4, size.y * 0.95, -54.9);
         pin3D1Enabled = true;
+      } else if (glbFile === 'CABIN.glb') {
+        pin3D1Enabled = false;
+        pinsEnabled = false;
+        pinCabinPoint.set(0, size.y + 4, 0);
+        pinCabinEnabled = true;
       } else {
         pin3D1Enabled = false;
+        pinCabinEnabled = false;
         const pinPositions3D = [
           [  0.5,  8.1],
           [  2.1, 36.8],
@@ -2267,6 +2938,16 @@
     }
 
     function goToMain() {
+      const _p4 = document.getElementById('page4');
+      if (_p4 && _p4.style.display === 'flex') { leavePage4(); return; }
+      const _p5 = document.getElementById('page5');
+      if (_p5 && _p5.style.display === 'flex') { leavePage5(); return; }
+      const _p6 = document.getElementById('page6');
+      if (_p6 && _p6.style.display === 'flex') { leavePage6(); return; }
+      const _p7 = document.getElementById('page7');
+      if (_p7 && _p7.style.display === 'flex') { leavePage7(); return; }
+      const _p8 = document.getElementById('page8');
+      if (_p8 && _p8.style.display === 'flex') { leavePage8(); return; }
       overlay.classList.add('visible');
       setTimeout(() => {
         page2.classList.remove('show');
@@ -2275,7 +2956,6 @@
         document.getElementById('back-to-p0-btn').style.display = 'block';
         mascotImg.classList.remove('show');
         hideFloorUI();
-        // 3. wait a frame so canvas is ready, then fade overlay out
         requestAnimationFrame(() => requestAnimationFrame(() => {
           overlay.classList.remove('visible');
         }));
@@ -2286,6 +2966,634 @@
 
     // pin index 4 (label "1") → ไป Page 2
     pinEls[4].addEventListener('click', goToPage2);
+
+    // pin index 5 (label "2") → ไป Page 4
+    pinEls[5].addEventListener('click', goToPage4);
+    // pin index 0 (label "3") → ไป Page 5
+    pinEls[0].addEventListener('click', goToPage5);
+    // pin index 1 (label "4") → ไป Page 6
+    pinEls[1].addEventListener('click', goToPage6);
+    // pin index 2 (label "5") → ไป Page 7
+    pinEls[2].addEventListener('click', goToPage7);
+    // pin index 3 (label "6") → ไป Page 8
+    pinEls[3].addEventListener('click', goToPage8);
+
+    // --- Page 4 ---
+    const page4 = document.getElementById('page4');
+    const p4BuildingTitle = document.getElementById('p4-building-title');
+    const p4BuildingImg   = document.getElementById('p4-building-img');
+    const p4Panel         = document.getElementById('p4-panel');
+    const p4ImgGrid       = document.getElementById('p4-img-grid');
+
+    const p4People = [
+      { name: 'อัจฉรา', surname: 'เสาวฤทธิ์', role: '', src: '33.png' },
+      { name: 'อานุภาพ', surname: 'วรรณคนาพล', role: '', src: '34.png' },
+      { name: 'เกษม', surname: 'สมบัติ', role: '', src: '35.png' },
+      { name: 'พงษ์ศักดิ์', surname: 'กองคำ', role: '', src: '36.png' },
+      { name: 'พิไลวรรณ', surname: 'จันต๊ะตา', role: '', src: '37.png' },
+      { name: 'อรพรรณ', surname: 'พรหมใจ', role: '', src: '38.png' },
+      { name: 'วีระวัฒน์', surname: 'ฟังเย็น', role: '', src: '39.png' },
+    ];
+
+    function goToPage4() {
+      overlay.classList.add('visible');
+      setTimeout(() => {
+        if (window.setRenderActive) window.setRenderActive(false);
+        pinEls.forEach(el => el.style.display = 'none');
+        page4.style.display = 'flex';
+        homeBtn.style.display = 'block';
+        document.getElementById('back-to-p0-btn').style.display = 'none';
+        mascotImg.classList.add('show');
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          page4.style.opacity = '1';
+          positionP4();
+          overlay.classList.remove('visible');
+        }));
+      }, 650);
+    }
+
+    function leavePage4() {
+      overlay.classList.add('visible');
+      setTimeout(() => {
+        page4.style.opacity = '0';
+        page4.style.display = 'none';
+        homeBtn.style.display = 'none';
+        document.getElementById('back-to-p0-btn').style.display = 'block';
+        mascotImg.classList.remove('show');
+        closeP4Panel();
+        if (window.setRenderActive) window.setRenderActive(true);
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          overlay.classList.remove('visible');
+        }));
+      }, 650);
+    }
+
+    function positionP4() {
+      const img = p4BuildingImg;
+      if (!img.complete) { img.onload = positionP4; return; }
+      const r = img.getBoundingClientRect();
+      if (r.width === 0) { requestAnimationFrame(positionP4); return; }
+      // title เหนือรูป
+      p4BuildingTitle.style.position = 'fixed';
+      p4BuildingTitle.style.left = (r.left + r.width / 2) + 'px';
+      p4BuildingTitle.style.top  = (r.top - 28) + 'px';
+      p4BuildingTitle.style.transform = 'translateX(-50%)';
+      openP4Panel();
+    }
+
+    function openP4Panel() {
+      // สร้าง 7 แถว ECG เปล่า
+      p4ImgGrid.innerHTML = '';
+      const panelH   = p4Panel.offsetHeight || (window.innerHeight * 0.8);
+      const titleH   = p4Panel.querySelector('h2').offsetHeight || 50;
+      const n        = 7;
+      const gap      = 3;
+      const available = panelH - titleH - 40;
+      const slotH    = Math.max(Math.floor((available - gap * (n - 1)) / n), 40);
+
+      p4People.forEach((person, i) => {
+        const row = document.createElement('div');
+        row.className = 'img-row';
+        row.style.height = slotH + 'px';
+        row.style.cursor = 'pointer';
+        row.addEventListener('click', () => {
+          openPersonPage(person.src || '', person.name || '', person.role || '', 'p4');
+        });
+
+        const slot = document.createElement('div');
+        slot.className = 'img-slot';
+        slot.style.height = slotH + 'px';
+        slot.style.width  = slotH + 'px';
+        if (person.src) {
+          const im = document.createElement('img');
+          im.src = person.src;
+          slot.appendChild(im);
+        }
+
+        const info = document.createElement('div');
+        info.className = 'row-info';
+        const nm = document.createElement('div');
+        nm.className = 'row-name';
+        const nameParts = (person.name || '').split(' ');
+        if (nameParts.length > 1) {
+          nm.innerHTML = nameParts[0] + '<br><span style="font-size:0.75rem;font-weight:400;color:rgba(160,220,255,0.7);">' + nameParts.slice(1).join(' ') + '</span>';
+        } else if (person.surname) {
+          nm.innerHTML = (person.name || '') + '<br><span style="font-size:0.75rem;font-weight:400;color:rgba(160,220,255,0.7);">' + person.surname + '</span>';
+        } else {
+          nm.textContent = person.name || '';
+        }
+        const rl = document.createElement('div');
+        rl.className = 'row-role';
+        rl.textContent = person.role || '';
+        info.appendChild(nm);
+        info.appendChild(rl);
+
+        const bar = document.createElement('div');
+        bar.className = 'ecg-bar';
+        bar.style.flex = '1';
+        const cv = document.createElement('canvas');
+        const sl = document.createElement('div');
+        sl.className = 'ecg-bar-scanline';
+        bar.appendChild(cv);
+        bar.appendChild(sl);
+
+        row.appendChild(slot);
+        row.appendChild(info);
+        row.appendChild(bar);
+        p4ImgGrid.appendChild(row);
+      });
+
+      p4Panel.style.display = 'block';
+      p4Panel.classList.remove('exit');
+      p4Panel.classList.remove('open');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        p4Panel.classList.add('open');
+        // resize canvas แล้ว start ECG
+        setTimeout(() => {
+          const bars = Array.from(p4ImgGrid.querySelectorAll('.ecg-bar'));
+          bars.forEach((bar, i) => {
+            const cv = bar.querySelector('canvas');
+            const W = Math.round(bar.getBoundingClientRect().width)  || 200;
+            const H = Math.round(bar.getBoundingClientRect().height) || slotH;
+            cv.width = W; cv.height = H;
+            const raf = runECGOnCanvas(cv, i, '2');
+            ecgRafs.push(raf);
+          });
+        }, 80);
+      }));
+    }
+
+    function closeP4Panel() {
+      p4Panel.classList.remove('open');
+      p4Panel.classList.add('exit');
+      setTimeout(() => {
+        p4Panel.classList.remove('exit');
+        p4Panel.style.display = 'none';
+        stopECG();
+      }, 320);
+    }
+
+
+
+    // --- Page 5 ---
+    const page5 = document.getElementById('page5');
+    const p5BuildingTitle = document.getElementById('p5-building-title');
+    const p5BuildingImg   = document.getElementById('p5-building-img');
+    const p5Panel         = document.getElementById('p5-panel');
+    const p5ImgGrid       = document.getElementById('p5-img-grid');
+
+    const p5People = [
+      { name: 'จิราพรR', surname: 'โรจน์ทินกร', role: '', src: '41.png' },
+      { name: 'น้ำเพชร', surname: 'ประกอบศิลป์', role: '', src: '40.png' },
+    ];
+
+    function goToPage5() {
+      overlay.classList.add('visible');
+      setTimeout(() => {
+        if (window.setRenderActive) window.setRenderActive(false);
+        pinEls.forEach(el => el.style.display = 'none');
+        page5.style.display = 'flex';
+        homeBtn.style.display = 'block';
+        document.getElementById('back-to-p0-btn').style.display = 'none';
+        mascotImg.classList.add('show');
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          page5.style.opacity = '1';
+          positionP5();
+          overlay.classList.remove('visible');
+        }));
+      }, 650);
+    }
+
+    function leavePage5() {
+      overlay.classList.add('visible');
+      setTimeout(() => {
+        page5.style.opacity = '0';
+        page5.style.display = 'none';
+        homeBtn.style.display = 'none';
+        document.getElementById('back-to-p0-btn').style.display = 'block';
+        mascotImg.classList.remove('show');
+        closeP5Panel();
+        if (window.setRenderActive) window.setRenderActive(true);
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          overlay.classList.remove('visible');
+        }));
+      }, 650);
+    }
+
+    function positionP5() {
+      const img = p5BuildingImg;
+      if (!img.complete) { img.onload = positionP5; return; }
+      const r = img.getBoundingClientRect();
+      if (r.width === 0) { requestAnimationFrame(positionP5); return; }
+      p5BuildingTitle.style.position = 'fixed';
+      p5BuildingTitle.style.left = (r.left + r.width / 2) + 'px';
+      p5BuildingTitle.style.top  = (r.top - 28) + 'px';
+      p5BuildingTitle.style.transform = 'translateX(-50%)';
+      openP5Panel();
+    }
+
+    function openP5Panel() {
+      p5ImgGrid.innerHTML = '';
+      const slotH = 72;
+      const cardTitles = ['ชั้นที่ 2', 'ชั้นที่ 1'];
+
+      p5People.forEach((person, i) => {
+        // card wrapper
+        const card = document.createElement('div');
+        card.style.cssText = 'background:rgba(255,255,255,0.04);border:1px solid rgba(200,150,40,0.3);border-radius:8px;padding:8px 10px;margin-bottom:8px;';
+
+        // card title
+        const cardTitle = document.createElement('div');
+        cardTitle.textContent = cardTitles[i] || ('ชั้นที่ ' + (i+1));
+        cardTitle.style.cssText = 'font-family:"Sriracha",cursive;font-size:0.85rem;color:#f5d87a;margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid rgba(200,150,40,0.25);';
+        card.appendChild(cardTitle);
+
+        const row = document.createElement('div');
+        row.className = 'img-row';
+        row.style.height = slotH + 'px';
+        row.style.cursor = 'pointer';
+        row.addEventListener('click', () => {
+          openPersonPage(person.src || '', person.name || '', person.role || '', 'p5');
+        });
+
+        const slot = document.createElement('div');
+        slot.className = 'img-slot';
+        slot.style.height = slotH + 'px';
+        slot.style.width  = slotH + 'px';
+        if (person.src) {
+          const im = document.createElement('img');
+          im.src = person.src;
+          slot.appendChild(im);
+        }
+
+        const info = document.createElement('div');
+        info.className = 'row-info';
+        const p5DisplayNames = { 'จิราพรR': 'จิราพร' };
+        const dispName = p5DisplayNames[person.name] || person.name || '';
+        const nm = document.createElement('div');
+        nm.className = 'row-name';
+        const nameParts = dispName.split(' ');
+        if (nameParts.length > 1) {
+          nm.innerHTML = nameParts[0] + '<br><span style="font-size:0.75rem;font-weight:400;color:rgba(160,220,255,0.7);">' + nameParts.slice(1).join(' ') + '</span>';
+        } else if (person.surname) {
+          nm.innerHTML = dispName + '<br><span style="font-size:0.75rem;font-weight:400;color:rgba(160,220,255,0.7);">' + person.surname + '</span>';
+        } else {
+          nm.textContent = dispName;
+        }
+        const rl = document.createElement('div');
+        rl.className = 'row-role';
+        rl.textContent = person.role || '';
+        info.appendChild(nm);
+        info.appendChild(rl);
+
+        const bar = document.createElement('div');
+        bar.className = 'ecg-bar';
+        bar.style.flex = '1';
+        const cv = document.createElement('canvas');
+        const sl = document.createElement('div');
+        sl.className = 'ecg-bar-scanline';
+        bar.appendChild(cv);
+        bar.appendChild(sl);
+
+        row.appendChild(slot);
+        row.appendChild(info);
+        row.appendChild(bar);
+        card.appendChild(row);
+        p5ImgGrid.appendChild(card);
+      });
+
+      p5Panel.style.display = 'block';
+      p5Panel.classList.remove('exit');
+      p5Panel.classList.remove('open');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        p5Panel.classList.add('open');
+        p5Panel.style.bottom = 'auto';
+        setTimeout(() => {
+          const bars = Array.from(p5ImgGrid.querySelectorAll('.ecg-bar'));
+          bars.forEach((bar, i) => {
+            const cv = bar.querySelector('canvas');
+            const W = Math.round(bar.getBoundingClientRect().width)  || 200;
+            const H = Math.round(bar.getBoundingClientRect().height) || slotH;
+            cv.width = W; cv.height = H;
+            const raf = runECGOnCanvas(cv, i, '2');
+            ecgRafs.push(raf);
+          });
+        }, 80);
+      }));
+    }
+
+    function closeP5Panel() {
+      p5Panel.classList.remove('open');
+      p5Panel.classList.add('exit');
+      setTimeout(() => {
+        p5Panel.classList.remove('exit');
+        p5Panel.style.display = 'none';
+        stopECG();
+      }, 320);
+    }
+
+    // --- Page 6 ---
+    const page6 = document.getElementById('page6');
+    const p6BuildingTitle = document.getElementById('p6-building-title');
+    const p6BuildingImg   = document.getElementById('p6-building-img');
+    const p6Panel         = document.getElementById('p6-panel');
+    const p6ImgGrid       = document.getElementById('p6-img-grid');
+    const p6People = [ { name: 'เทพพิทักษ์', surname: 'บุญทา', role: '', src: '42.png' } ];
+
+    function goToPage6() {
+      overlay.classList.add('visible');
+      setTimeout(() => {
+        if (window.setRenderActive) window.setRenderActive(false);
+        pinEls.forEach(el => el.style.display = 'none');
+        page6.style.display = 'flex';
+        homeBtn.style.display = 'block';
+        document.getElementById('back-to-p0-btn').style.display = 'none';
+        mascotImg.classList.add('show');
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          page6.style.opacity = '1';
+          positionP6();
+          overlay.classList.remove('visible');
+        }));
+      }, 650);
+    }
+
+    function leavePage6() {
+      overlay.classList.add('visible');
+      setTimeout(() => {
+        page6.style.opacity = '0';
+        page6.style.display = 'none';
+        homeBtn.style.display = 'none';
+        document.getElementById('back-to-p0-btn').style.display = 'block';
+        mascotImg.classList.remove('show');
+        closeP6Panel();
+        if (window.setRenderActive) window.setRenderActive(true);
+        requestAnimationFrame(() => requestAnimationFrame(() => { overlay.classList.remove('visible'); }));
+      }, 650);
+    }
+
+    function positionP6() {
+      const img = p6BuildingImg;
+      if (!img.complete) { img.onload = positionP6; return; }
+      const r = img.getBoundingClientRect();
+      if (r.width === 0) { requestAnimationFrame(positionP6); return; }
+      p6BuildingTitle.style.position = 'fixed';
+      p6BuildingTitle.style.left = (r.left + r.width / 2) + 'px';
+      p6BuildingTitle.style.top  = (r.top - 28) + 'px';
+      p6BuildingTitle.style.transform = 'translateX(-50%)';
+      openP6Panel();
+    }
+
+    function openP6Panel() {
+      p6ImgGrid.innerHTML = '';
+      const n = 1; const gap = 3; const slotH = 72;
+      p6People.forEach((person, i) => {
+        const row = document.createElement('div');
+        row.className = 'img-row'; row.style.height = slotH + 'px'; row.style.cursor = 'pointer';
+        row.addEventListener('click', () => { openPersonPage(person.src || '', person.name || '', person.role || '', 'p6'); });
+        const slot = document.createElement('div');
+        slot.className = 'img-slot'; slot.style.height = slotH + 'px'; slot.style.width = slotH + 'px';
+        if (person.src) { const im = document.createElement('img'); im.src = person.src; slot.appendChild(im); }
+        const info = document.createElement('div'); info.className = 'row-info';
+        const nm = document.createElement('div'); nm.className = 'row-name';
+        if (person.surname) {
+          nm.innerHTML = (person.name || '') + '<br><span style="font-size:0.75rem;font-weight:400;color:rgba(160,220,255,0.7);">' + person.surname + '</span>';
+        } else { nm.textContent = person.name || ''; }
+        const rl = document.createElement('div'); rl.className = 'row-role'; rl.textContent = person.role || '';
+        info.appendChild(nm); info.appendChild(rl);
+        const bar = document.createElement('div'); bar.className = 'ecg-bar'; bar.style.flex = '1';
+        const cv = document.createElement('canvas');
+        const sl = document.createElement('div'); sl.className = 'ecg-bar-scanline';
+        bar.appendChild(cv); bar.appendChild(sl);
+        row.appendChild(slot); row.appendChild(info); row.appendChild(bar);
+        p6ImgGrid.appendChild(row);
+      });
+      p6Panel.style.display = 'block';
+      p6Panel.classList.remove('exit'); p6Panel.classList.remove('open');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        p6Panel.classList.add('open');
+        const titleH = p6Panel.querySelector('h2').offsetHeight || 50;
+        const usedH = titleH + 40 + slotH * n + gap * (n - 1);
+        const winH = window.innerHeight; const topPx = winH * 0.08;
+        p6Panel.style.bottom = Math.max(winH - topPx - usedH, 8) + 'px';
+        setTimeout(() => {
+          const bars = Array.from(p6ImgGrid.querySelectorAll('.ecg-bar'));
+          bars.forEach((bar, i) => {
+            const cv = bar.querySelector('canvas');
+            const W = Math.round(bar.getBoundingClientRect().width) || 200;
+            const H = Math.round(bar.getBoundingClientRect().height) || slotH;
+            cv.width = W; cv.height = H;
+            const raf = runECGOnCanvas(cv, i, '2'); ecgRafs.push(raf);
+          });
+        }, 80);
+      }));
+    }
+
+    function closeP6Panel() {
+      p6Panel.classList.remove('open'); p6Panel.classList.add('exit');
+      setTimeout(() => { p6Panel.classList.remove('exit'); p6Panel.style.display = 'none'; stopECG(); }, 320);
+    }
+
+    // --- Page 8 ---
+    const page8 = document.getElementById('page8');
+    const p8BuildingTitle = document.getElementById('p8-building-title');
+    const p8BuildingImg   = document.getElementById('p8-building-img');
+    const p8Panel         = document.getElementById('p8-panel');
+    const p8ImgGrid       = document.getElementById('p8-img-grid');
+    const p8People = [
+      { name: 'วินัย', surname: 'การะเกตุ', role: 'ผู้ปฏิบัติงานวิทยาศาสตร์', src: '48.png' },
+      { name: 'ภัสสร์พัณณ์', surname: 'ศรีวิชัย', role: 'นักวิทยาศาสตร์', src: '49.png' },
+    ];
+
+    function goToPage8() {
+      overlay.classList.add('visible');
+      setTimeout(() => {
+        if (window.setRenderActive) window.setRenderActive(false);
+        pinEls.forEach(el => el.style.display = 'none');
+        page8.style.display = 'flex';
+        homeBtn.style.display = 'block';
+        document.getElementById('back-to-p0-btn').style.display = 'none';
+        mascotImg.classList.add('show');
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          page8.style.opacity = '1';
+          positionP8();
+          overlay.classList.remove('visible');
+        }));
+      }, 650);
+    }
+
+    function leavePage8() {
+      overlay.classList.add('visible');
+      setTimeout(() => {
+        page8.style.opacity = '0';
+        page8.style.display = 'none';
+        homeBtn.style.display = 'none';
+        document.getElementById('back-to-p0-btn').style.display = 'block';
+        mascotImg.classList.remove('show');
+        closeP8Panel();
+        if (window.setRenderActive) window.setRenderActive(true);
+        requestAnimationFrame(() => requestAnimationFrame(() => { overlay.classList.remove('visible'); }));
+      }, 650);
+    }
+
+    function positionP8() {
+      const img = p8BuildingImg;
+      if (!img.complete) { img.onload = positionP8; return; }
+      const r = img.getBoundingClientRect();
+      if (r.width === 0) { requestAnimationFrame(positionP8); return; }
+      p8BuildingTitle.style.position = 'fixed';
+      p8BuildingTitle.style.left = (r.left + r.width / 2) + 'px';
+      p8BuildingTitle.style.top  = (r.top - 28) + 'px';
+      p8BuildingTitle.style.transform = 'translateX(-50%)';
+      openP8Panel();
+    }
+
+    function openP8Panel() {
+      p8ImgGrid.innerHTML = '';
+      const n = 2; const gap = 3; const slotH = 72;
+      p8People.forEach((person, i) => {
+        const row = document.createElement('div');
+        row.className = 'img-row'; row.style.height = slotH + 'px'; row.style.cursor = 'pointer';
+        row.addEventListener('click', () => { openPersonPage(person.src || '', person.name || '', person.role || '', 'p8-p4'); });
+        const slot = document.createElement('div');
+        slot.className = 'img-slot'; slot.style.height = slotH + 'px'; slot.style.width = slotH + 'px';
+        if (person.src) { const im = document.createElement('img'); im.src = person.src; slot.appendChild(im); }
+        const info = document.createElement('div'); info.className = 'row-info';
+        const nm = document.createElement('div'); nm.className = 'row-name'; nm.textContent = person.name || '';
+        const rl = document.createElement('div'); rl.className = 'row-role'; rl.textContent = person.surname || '';
+        info.appendChild(nm); info.appendChild(rl);
+        const bar = document.createElement('div'); bar.className = 'ecg-bar'; bar.style.flex = '1';
+        const cv = document.createElement('canvas');
+        const sl = document.createElement('div'); sl.className = 'ecg-bar-scanline';
+        bar.appendChild(cv); bar.appendChild(sl);
+        row.appendChild(slot); row.appendChild(info); row.appendChild(bar);
+        p8ImgGrid.appendChild(row);
+      });
+      p8Panel.style.display = 'block';
+      p8Panel.classList.remove('exit'); p8Panel.classList.remove('open');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        p8Panel.classList.add('open');
+        const titleH = p8Panel.querySelector('h2').offsetHeight || 50;
+        const usedH = titleH + 40 + slotH * n + gap * (n - 1);
+        const winH = window.innerHeight; const topPx = winH * 0.08;
+        p8Panel.style.bottom = Math.max(winH - topPx - usedH, 8) + 'px';
+        setTimeout(() => {
+          const bars = Array.from(p8ImgGrid.querySelectorAll('.ecg-bar'));
+          bars.forEach((bar, i) => {
+            const cv = bar.querySelector('canvas');
+            const W = Math.round(bar.getBoundingClientRect().width) || 200;
+            const H = Math.round(bar.getBoundingClientRect().height) || slotH;
+            cv.width = W; cv.height = H;
+            const raf = runECGOnCanvas(cv, i, '2'); ecgRafs.push(raf);
+          });
+        }, 80);
+      }));
+    }
+
+    function closeP8Panel() {
+      p8Panel.classList.remove('open'); p8Panel.classList.add('exit');
+      setTimeout(() => { p8Panel.classList.remove('exit'); p8Panel.style.display = 'none'; stopECG(); }, 320);
+    }
+
+    // --- Page 7 ---
+    const page7 = document.getElementById('page7');
+    const p7BuildingTitle = document.getElementById('p7-building-title');
+    const p7BuildingImg   = document.getElementById('p7-building-img');
+    const p7Panel         = document.getElementById('p7-panel');
+    const p7ImgGrid       = document.getElementById('p7-img-grid');
+    const p7People = [ { name: 'ณัฏฐกานต์', surname: 'มุกดาจตุรพักตร์', role: '', src: '43.png' } ];
+
+    function goToPage7() {
+      overlay.classList.add('visible');
+      setTimeout(() => {
+        if (window.setRenderActive) window.setRenderActive(false);
+        pinEls.forEach(el => el.style.display = 'none');
+        page7.style.display = 'flex';
+        homeBtn.style.display = 'block';
+        document.getElementById('back-to-p0-btn').style.display = 'none';
+        mascotImg.classList.add('show');
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          page7.style.opacity = '1';
+          positionP7();
+          overlay.classList.remove('visible');
+        }));
+      }, 650);
+    }
+
+    function leavePage7() {
+      overlay.classList.add('visible');
+      setTimeout(() => {
+        page7.style.opacity = '0';
+        page7.style.display = 'none';
+        homeBtn.style.display = 'none';
+        document.getElementById('back-to-p0-btn').style.display = 'block';
+        mascotImg.classList.remove('show');
+        closeP7Panel();
+        if (window.setRenderActive) window.setRenderActive(true);
+        requestAnimationFrame(() => requestAnimationFrame(() => { overlay.classList.remove('visible'); }));
+      }, 650);
+    }
+
+    function positionP7() {
+      const img = p7BuildingImg;
+      if (!img.complete) { img.onload = positionP7; return; }
+      const r = img.getBoundingClientRect();
+      if (r.width === 0) { requestAnimationFrame(positionP7); return; }
+      p7BuildingTitle.style.position = 'fixed';
+      p7BuildingTitle.style.left = (r.left + r.width / 2) + 'px';
+      p7BuildingTitle.style.top  = (r.top - 28) + 'px';
+      p7BuildingTitle.style.transform = 'translateX(-50%)';
+      openP7Panel();
+    }
+
+    function openP7Panel() {
+      p7ImgGrid.innerHTML = '';
+      const n = 1; const gap = 3; const slotH = 72;
+      p7People.forEach((person, i) => {
+        const row = document.createElement('div');
+        row.className = 'img-row'; row.style.height = slotH + 'px'; row.style.cursor = 'pointer';
+        row.addEventListener('click', () => { openPersonPage(person.src || '', person.name || '', person.role || '', 'p7'); });
+        const slot = document.createElement('div');
+        slot.className = 'img-slot'; slot.style.height = slotH + 'px'; slot.style.width = slotH + 'px';
+        if (person.src) { const im = document.createElement('img'); im.src = person.src; slot.appendChild(im); }
+        const info = document.createElement('div'); info.className = 'row-info';
+        const nm = document.createElement('div'); nm.className = 'row-name';
+        if (person.surname) {
+          nm.innerHTML = (person.name || '') + '<br><span style="font-size:0.75rem;font-weight:400;color:rgba(160,220,255,0.7);">' + person.surname + '</span>';
+        } else { nm.textContent = person.name || ''; }
+        const rl = document.createElement('div'); rl.className = 'row-role'; rl.textContent = person.role || '';
+        info.appendChild(nm); info.appendChild(rl);
+        const bar = document.createElement('div'); bar.className = 'ecg-bar'; bar.style.flex = '1';
+        const cv = document.createElement('canvas');
+        const sl = document.createElement('div'); sl.className = 'ecg-bar-scanline';
+        bar.appendChild(cv); bar.appendChild(sl);
+        row.appendChild(slot); row.appendChild(info); row.appendChild(bar);
+        p7ImgGrid.appendChild(row);
+      });
+      p7Panel.style.display = 'block';
+      p7Panel.classList.remove('exit'); p7Panel.classList.remove('open');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        p7Panel.classList.add('open');
+        const titleH = p7Panel.querySelector('h2').offsetHeight || 50;
+        const usedH = titleH + 40 + slotH * n + gap * (n - 1);
+        const winH = window.innerHeight; const topPx = winH * 0.08;
+        p7Panel.style.bottom = Math.max(winH - topPx - usedH, 8) + 'px';
+        setTimeout(() => {
+          const bars = Array.from(p7ImgGrid.querySelectorAll('.ecg-bar'));
+          bars.forEach((bar, i) => {
+            const cv = bar.querySelector('canvas');
+            const W = Math.round(bar.getBoundingClientRect().width) || 200;
+            const H = Math.round(bar.getBoundingClientRect().height) || slotH;
+            cv.width = W; cv.height = H;
+            const raf = runECGOnCanvas(cv, i, '2'); ecgRafs.push(raf);
+          });
+        }, 80);
+      }));
+    }
+
+    function closeP7Panel() {
+      p7Panel.classList.remove('open'); p7Panel.classList.add('exit');
+      setTimeout(() => { p7Panel.classList.remove('exit'); p7Panel.style.display = 'none'; stopECG(); }, 320);
+    }
 
     // Page 3
     const page3 = document.getElementById('page3');
@@ -2313,9 +3621,119 @@
       }, delay);
     }
 
+    function p3LoadMap() {
+      const mapFrame = document.getElementById('p3-map-frame');
+      if (!mapFrame) return;
+      mapFrame.innerHTML = `
+<style>
+@keyframes p3mapGlowPulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+@keyframes p3mapBeamSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes p3mapScanMove{0%{top:-10%}100%{top:110%}}
+@keyframes p3mapScanBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
+</style>
+<div id="p3-map-wrap" style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 50% 55%,rgba(0,60,120,.55),rgba(0,10,30,.95));pointer-events:none;z-index:0;"></div>
+  <div style="position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:75%;height:65%;border-radius:50%;background:radial-gradient(ellipse,rgba(0,160,255,.28),rgba(0,80,200,.12) 45%,transparent 70%);animation:p3mapGlowPulse 3s ease-in-out infinite;pointer-events:none;z-index:1;"></div>
+  <div style="position:absolute;left:50%;top:50%;width:200%;height:200%;transform:translate(-50%,-50%);background:conic-gradient(from 0deg,transparent,rgba(0,180,255,.06) 18deg,transparent 36deg,transparent 180deg,rgba(0,180,255,.04) 198deg,transparent 216deg);animation:p3mapBeamSpin 12s linear infinite;pointer-events:none;z-index:1;border-radius:50%;"></div>
+  <div style="position:absolute;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,220,255,.35) 30%,rgba(0,220,255,.6) 50%,rgba(0,220,255,.35) 70%,transparent);animation:p3mapScanMove 4s linear infinite;pointer-events:none;z-index:5;box-shadow:0 0 12px rgba(0,220,255,.5);"></div>
+  <canvas id="p3-map-canvas" style="position:relative;z-index:3;width:90%;height:90%;border-radius:6px;display:block;opacity:0;filter:sepia(0.85) contrast(1.1) brightness(0.95);-webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 50%,black 30%,transparent 85%);mask-image:radial-gradient(ellipse 75% 70% at 50% 50%,black 30%,transparent 85%);"></canvas>
+  <div id="p3-map-scan-label" style="position:absolute;z-index:7;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;">
+    <span style="font-family:monospace;font-size:1.8rem;letter-spacing:.3em;color:#00e5ff;text-shadow:0 0 14px #00e5ff,0 0 32px rgba(0,229,255,.6);animation:p3mapScanBlink .9s step-start infinite;">MAP SCAN</span>
+    <span style="display:block;width:60px;height:1px;background:linear-gradient(90deg,transparent,#00e5ff,transparent);animation:p3mapScanBlink .9s step-start infinite;animation-delay:.45s;"></span>
+  </div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 85% 80% at 50% 50%,transparent 40%,rgba(0,5,18,.65));pointer-events:none;z-index:4;border-radius:6px;"></div>
+  <div style="position:absolute;top:0;left:10%;width:80%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,200,255,.5),transparent);pointer-events:none;z-index:6;box-shadow:0 0 18px rgba(0,200,255,.4);"></div>
+  <div style="position:absolute;bottom:0;left:10%;width:80%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,140,255,.35),transparent);pointer-events:none;z-index:6;"></div>
+</div>`;
+      setTimeout(function() {
+        const canvas = document.getElementById('p3-map-canvas');
+        if (!canvas) return;
+        const sourceImg = new Image();
+        sourceImg.src = '26-7.png';
+        sourceImg.onload = function() {
+          requestAnimationFrame(function() {
+            const W = Math.round(canvas.getBoundingClientRect().width) || 300;
+            const H = Math.round(canvas.getBoundingClientRect().height) || 200;
+            canvas.width = W; canvas.height = H;
+            const off = document.createElement('canvas');
+            off.width = W; off.height = H;
+            const octx = off.getContext('2d');
+            octx.drawImage(sourceImg, 0, 0, W, H);
+            const imgData = octx.getImageData(0, 0, W, H);
+            const ctx = canvas.getContext('2d');
+            canvas.style.opacity = '1';
+            const scanLabel = document.getElementById('p3-map-scan-label');
+            if (scanLabel) scanLabel.style.display = 'none';
+            const BS = 4;
+            const cols = Math.ceil(W / BS);
+            const rows = Math.ceil(H / BS);
+            const total = cols * rows;
+            const order = new Int32Array(total);
+            for (let i = 0; i < total; i++) order[i] = i;
+            for (let i = total - 1; i > 0; i--) {
+              const j = (Math.random() * (i + 1)) | 0;
+              const tmp = order[i]; order[i] = order[j]; order[j] = tmp;
+            }
+            const totalDuration = 2200;
+            const startTs = performance.now();
+            let drawn = 0;
+            function revealStep(now) {
+              const elapsed = now - startTs;
+              const progress = Math.min(elapsed / totalDuration, 1);
+              const eased = progress < 0.5 ? 2*progress*progress : -1+(4-2*progress)*progress;
+              const target = Math.floor(eased * total);
+              if (target > drawn) {
+                const src = imgData.data;
+                for (let k = drawn; k < target; k++) {
+                  const bi = order[k];
+                  const bx = (bi % cols) * BS;
+                  const by = Math.floor(bi / cols) * BS;
+                  const sx = Math.min(bx + (BS >> 1), W - 1);
+                  const sy = Math.min(by + (BS >> 1), H - 1);
+                  const p = (sy * W + sx) * 4;
+                  ctx.fillStyle = `rgb(${src[p]},${src[p+1]},${src[p+2]})`;
+                  ctx.fillRect(bx, by, BS, BS);
+                }
+                drawn = target;
+              }
+              if (progress < 1) {
+                requestAnimationFrame(revealStep);
+              } else {
+                ctx.putImageData(imgData, 0, 0);
+                const wrap = document.getElementById('p3-map-wrap');
+                if (wrap) {
+                  const badge = document.createElement('div');
+                  badge.style.cssText = 'position:absolute;top:8px;right:10px;z-index:10;font-family:monospace;font-size:.72rem;letter-spacing:.12em;color:#00e676;text-shadow:0 0 8px #00e676,0 0 18px rgba(0,230,118,.5);pointer-events:none;opacity:0;transition:opacity .4s ease;';
+                  badge.textContent = '✔ SCAN COMPLETED';
+                  wrap.appendChild(badge);
+                  requestAnimationFrame(() => { badge.style.opacity = '1'; });
+                  // add draggable pin for ประเสริฐ
+                  const pin = document.createElement('div');
+                  pin.className = 'map-pin';
+                  pin.style.cssText = 'position:absolute;z-index:8;transform:translate(-50%,-50%);left:78%;top:64%;pointer-events:none;';
+                  pin.innerHTML = '<div class="map-pin-dot"></div><div class="map-pin-label">●</div><div class="map-pin-ring"></div><div class="map-pin-ring"></div><div class="map-pin-ring"></div>';
+                  wrap.appendChild(pin);
+                }
+              }
+            }
+            requestAnimationFrame(revealStep);
+          });
+        };
+      }, 800);
+    }
+
     function p3StartEffects() {
-      // typewriter ความเชี่ยวชาญ
+      // reset bars
+      p3Bars.forEach(b => {
+        const bar = document.getElementById(b.id);
+        const val = document.getElementById(b.valId);
+        if (bar) { bar.style.transition = 'none'; bar.style.width = '0%'; }
+        if (val) val.textContent = '0%';
+      });
+
+      // 1) typewriter ความเชี่ยวชาญ
       const expertEl = document.getElementById('p3-expertise-text');
+      const charDelay = p3ExpertiseText.length * 35 + 300;
       if (expertEl) {
         expertEl.textContent = '';
         let i = 0;
@@ -2332,20 +3750,18 @@
         }
         setTimeout(nextChar, 300);
       }
-      // reset bars
-      p3Bars.forEach(b => {
-        const bar = document.getElementById(b.id);
-        const val = document.getElementById(b.valId);
-        if (bar) { bar.style.transition = 'none'; bar.style.width = '0%'; }
-        if (val) val.textContent = '0%';
-      });
-      // animate bars
-      const charDelay = p3ExpertiseText.length * 35 + 300;
+
+      // 2) bars ทีละอัน หลัง typewriter จบ (bar แต่ละอันห่างกัน 3600ms)
+      const barDuration = 3500;
       p3Bars.forEach((b, i) => {
         const bar = document.getElementById(b.id);
         const val = document.getElementById(b.valId);
-        if (bar && val) p3AnimateBar(bar, val, b.target, charDelay + i * 200);
+        if (bar && val) p3AnimateBar(bar, val, b.target, charDelay + i * (barDuration + 200));
       });
+
+      // 3) แผนที่ หลัง bars ทั้งหมดจบ
+      const mapDelay = charDelay + p3Bars.length * (barDuration + 200);
+      setTimeout(() => p3LoadMap(), mapDelay);
     }
 
     function goToPage3() {
@@ -2379,6 +3795,117 @@
     // pin ของ 3D-1.glb → ไป Page 3
     pin3D1El.classList.add('clickable');
     pin3D1El.addEventListener('click', goToPage3);
+
+    const pageCabin     = document.getElementById('page-cabin');
+    const cabinPanel    = document.getElementById('cabin-panel');
+    const cabinImgGrid  = document.getElementById('cabin-img-grid');
+    const cabinBackBtn  = document.getElementById('cabin-back-btn');
+    const cabinBuildingTitle = document.getElementById('cabin-building-title');
+
+    const cabinPeople = [
+      { name: 'ประจันทร์', surname: 'วงค์แสง', role: '', src: '46.png' },
+      { name: 'ดุสิต', surname: 'ดวงบาล', role: '', src: '47.png' },
+      { name: '', surname: '', role: '', src: '' },
+    ];
+
+    function goToPageCabin() {
+      overlay.classList.add('visible');
+      setTimeout(() => {
+        if (window.setRenderActive) window.setRenderActive(false);
+        pinCabinEnabled = false;
+        pageCabin.style.display = 'flex';
+        pageCabin.style.opacity = '0';
+        cabinBackBtn.style.display = 'block';
+        document.getElementById('back-to-p0-btn').style.display = 'none';
+        mascotImg.classList.add('show');
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          pageCabin.style.opacity = '1';
+          positionCabin();
+          overlay.classList.remove('visible');
+        }));
+      }, 650);
+    }
+
+    function positionCabin() {
+      const img = document.getElementById('cabin-building-img');
+      const doPosition = () => {
+        const r = img.getBoundingClientRect();
+        if (r.width === 0) { requestAnimationFrame(doPosition); return; }
+        cabinBuildingTitle.style.position = 'fixed';
+        cabinBuildingTitle.style.left = (r.left + r.width / 2) + 'px';
+        cabinBuildingTitle.style.top  = (r.top - 28) + 'px';
+        cabinBuildingTitle.style.transform = 'translateX(-50%)';
+      };
+      if (!img.complete) { img.onload = doPosition; } else { doPosition(); }
+      openCabinPanel();
+    }
+
+    function openCabinPanel() {
+      cabinImgGrid.innerHTML = '';
+      const n = 3; const gap = 3; const slotH = 72;
+      cabinPeople.forEach((person, i) => {
+        const row = document.createElement('div');
+        row.className = 'img-row'; row.style.height = slotH + 'px'; row.style.cursor = 'pointer';
+        row.addEventListener('click', () => { openPersonPage(person.src || '', person.name || '', person.role || '', 'cabin'); });
+        const slot = document.createElement('div');
+        slot.className = 'img-slot'; slot.style.height = slotH + 'px'; slot.style.width = slotH + 'px';
+        if (person.src) { const im = document.createElement('img'); im.src = person.src; slot.appendChild(im); }
+        const info = document.createElement('div'); info.className = 'row-info';
+        const nm = document.createElement('div'); nm.className = 'row-name';
+        if (person.surname) {
+          nm.innerHTML = (person.name || '') + '<br><span style="font-size:0.75rem;font-weight:400;color:rgba(160,220,255,0.7);">' + person.surname + '</span>';
+        } else { nm.textContent = person.name || ''; }
+        const rl = document.createElement('div'); rl.className = 'row-role'; rl.textContent = person.role || '';
+        info.appendChild(nm); info.appendChild(rl);
+        const bar = document.createElement('div'); bar.className = 'ecg-bar'; bar.style.flex = '1';
+        const cv = document.createElement('canvas');
+        const sl = document.createElement('div'); sl.className = 'ecg-bar-scanline';
+        bar.appendChild(cv); bar.appendChild(sl);
+        row.appendChild(slot); row.appendChild(info); row.appendChild(bar);
+        cabinImgGrid.appendChild(row);
+      });
+      cabinPanel.style.display = 'block';
+      cabinPanel.classList.remove('exit'); cabinPanel.classList.remove('open');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        cabinPanel.classList.add('open');
+        const titleH = cabinPanel.querySelector('h2').offsetHeight || 50;
+        const usedH = titleH + 40 + slotH * n + gap * (n - 1);
+        const winH = window.innerHeight; const topPx = winH * 0.08;
+        cabinPanel.style.bottom = Math.max(winH - topPx - usedH, 8) + 'px';
+        setTimeout(() => {
+          const bars = Array.from(cabinImgGrid.querySelectorAll('.ecg-bar'));
+          bars.forEach((bar, idx) => {
+            const cv = bar.querySelector('canvas');
+            const W = Math.round(bar.getBoundingClientRect().width) || 200;
+            const H = Math.round(bar.getBoundingClientRect().height) || slotH;
+            cv.width = W; cv.height = H;
+            const raf = runECGOnCanvas(cv, idx, '2'); ecgRafs.push(raf);
+          });
+        }, 100);
+      }));
+    }
+
+    function closeCabinPanel() {
+      cabinPanel.classList.add('exit');
+      setTimeout(() => { cabinPanel.style.display = 'none'; cabinPanel.classList.remove('exit','open'); }, 320);
+    }
+
+    cabinBackBtn.addEventListener('click', () => {
+      overlay.classList.add('visible');
+      setTimeout(() => {
+        pageCabin.style.opacity = '0';
+        pageCabin.style.display = 'none';
+        cabinBackBtn.style.display = 'none';
+        document.getElementById('back-to-p0-btn').style.display = 'block';
+        mascotImg.classList.remove('show');
+        closeCabinPanel();
+        if (window.setRenderActive) window.setRenderActive(true);
+        pinCabinEnabled = true;
+        requestAnimationFrame(() => requestAnimationFrame(() => { overlay.classList.remove('visible'); }));
+      }, 650);
+    });
+
+    pinCabinEl.addEventListener('click', goToPageCabin);
 
     const backToP0Btn = document.getElementById('back-to-p0-btn');
     backToP0Btn.addEventListener('click', () => {

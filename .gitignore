@@ -2,8 +2,6 @@
 *.skb
 *.skp
 
-# GLB (ไฟล์ใหญ่ — เก็บแยกหรือ Git LFS)
-*.glb
 
 # ไฟล์ระบบ
 .DS_Store
