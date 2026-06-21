@@ -2066,6 +2066,15 @@
 
   <button id="back-to-p0-btn"><img src="999.png" width="110" style="display:block;" draggable="false"/></button>
 
+  <!-- QR button -->
+  <button id="qr-btn" style="position:fixed;top:24px;left:24px;z-index:80;background:rgba(0,0,0,0.6);border:1.5px solid rgba(0,229,255,0.5);border-radius:12px;padding:8px 14px;color:#00e5ff;font-family:monospace;font-size:0.85rem;letter-spacing:0.1em;cursor:pointer;backdrop-filter:blur(6px);">QR</button>
+
+  <!-- QR overlay -->
+  <div id="qr-overlay" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.92);align-items:center;justify-content:center;flex-direction:column;gap:20px;">
+    <img src="QR.png" style="width:min(70vw,70vh);height:auto;border-radius:12px;" draggable="false"/>
+    <button id="qr-close" style="background:rgba(0,229,255,0.15);border:1.5px solid rgba(0,229,255,0.5);color:#00e5ff;font-family:monospace;font-size:1rem;padding:10px 36px;border-radius:50px;cursor:pointer;letter-spacing:0.12em;">✕ ปิด</button>
+  </div>
+
   <!-- Building pin button — แสดงในหน้า 3D view -->
 
   <script>
@@ -4388,6 +4397,14 @@
     });
   </script>
 <script>
+  // QR overlay
+  document.getElementById('qr-btn').addEventListener('click', function() {
+    const o = document.getElementById('qr-overlay');
+    o.style.display = 'flex';
+  });
+  document.getElementById('qr-close').addEventListener('click', function() {
+    document.getElementById('qr-overlay').style.display = 'none';
+  });
   // ล็อค scroll บน iOS Safari — ต้อง block ทั้ง touchmove และ prevent default ที่ touchstart
   var _startX, _startY;
   document.addEventListener('touchstart', function(e) {
