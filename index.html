@@ -8,6 +8,21 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; height: 100%; background: #0d1117; overflow: hidden; overscroll-behavior: none; touch-action: pan-y; }
+    #rotate-warning {
+      display: none;
+      position: fixed; inset: 0; z-index: 99999;
+      background: #0d1117;
+      flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+      color: #00e5ff; font-family: 'Noto Sans Thai', sans-serif; text-align: center;
+    }
+    #rotate-warning svg { animation: rotateHint 1.5s ease-in-out infinite alternate; }
+    @keyframes rotateHint {
+      from { transform: rotate(-20deg); }
+      to   { transform: rotate(20deg); }
+    }
+    @media (orientation: portrait) and (max-width: 1024px) {
+      #rotate-warning { display: flex; }
+    }
     canvas { display: block; }
 
     .pin {
@@ -1545,6 +1560,14 @@
   </style>
 </head>
 <body>
+<div id="rotate-warning">
+  <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5">
+    <rect x="5" y="2" width="14" height="20" rx="2"/>
+    <path d="M12 18h.01"/>
+  </svg>
+  <div style="font-size:1.2rem;font-weight:700;letter-spacing:0.1em;">กรุณาหมุนหน้าจอ</div>
+  <div style="font-size:0.9rem;opacity:0.7;">Please rotate your device to landscape</div>
+</div>
 
   <!-- Page 0 -->
   <div id="page0">
@@ -2363,7 +2386,7 @@
       const map26_5Names = ['กานต์','นงพงา'];
       const map26_8Names = ['จิราพรR','น้ำเพชร','เทพพิทักษ์','ณัฏฐกานต์'];
       const map26_6Names = ['จงกล','ขจรเกียรติ์','จอมสุดา','สุดาพร','ดารชาต์','นิสรา','วาธิณี'];
-      const lockedPins = { 'อภินันท์': { x: 32, y: 25 }, 'ชนกันต์': { x: 53, y: 27 }, 'อุดมลักษณ์': { x: 63, y: 27 }, 'โดม': { x: 43, y: 27 }, 'จรรยา': { x: 71, y: 27 }, 'จิราพร': { x: 70, y: 66 }, 'กัลยารัตน์': { x: 65, y: 81 }, 'ศิรินยา': { x: 73, y: 83 }, 'เอกรินทร์': { x: 83, y: 71 }, 'จงกล': { x: 72, y: 17 }, 'ขจรเกียรติ์': { x: 83, y: 17 }, 'จอมสุดา': { x: 34, y: 16 }, 'สุดาพร': { x: 61, y: 18 }, 'ดารชาต์': { x: 44, y: 20 }, 'นิสรา': { x: 51, y: 84 }, 'วาธิณี': { x: 66, y: 82 }, 'กานต์': { x: 22, y: 28 }, 'นงพงา': { x: 37, y: 26 }, 'อัจฉรา': { x: 20, y: 62 }, 'อานุภาพ': { x: 38, y: 61 }, 'เกษม': { x: 36, y: 70 }, 'พงษ์ศักดิ์': { x: 36, y: 70 }, 'พิไลวรรณ': { x: 18, y: 87 }, 'อรพรรณ': { x: 34, y: 87 }, 'วีระวัฒน์': { x: 39, y: 79 }, 'น้ำเพชร': { x: 50, y: 50 }, 'จิราพรR': { x: 50, y: 50 }, 'เทพพิทักษ์': { x: 50, y: 50 }, 'ประจันทร์': { x: 57, y: 39 }, 'ดุสิต': { x: 57, y: 42 }, 'วินัย': { x: 53, y: 16 }, 'ภัสสร์พัณณ์': { x: 42, y: 16 } };
+      const lockedPins = { 'อภินันท์': { x: 32, y: 25 }, 'ชนกันต์': { x: 53, y: 27 }, 'อุดมลักษณ์': { x: 63, y: 27 }, 'โดม': { x: 43, y: 27 }, 'จรรยา': { x: 71, y: 27 }, 'จิราพร': { x: 70, y: 66 }, 'กัลยารัตน์': { x: 65, y: 81 }, 'ศิรินยา': { x: 73, y: 83 }, 'เอกรินทร์': { x: 83, y: 71 }, 'จงกล': { x: 72, y: 17 }, 'ขจรเกียรติ์': { x: 83, y: 17 }, 'จอมสุดา': { x: 34, y: 16 }, 'สุดาพร': { x: 61, y: 18 }, 'ดารชาต์': { x: 44, y: 20 }, 'นิสรา': { x: 51, y: 84 }, 'วาธิณี': { x: 66, y: 82 }, 'กานต์': { x: 22, y: 28 }, 'นงพงา': { x: 37, y: 26 }, 'อัจฉรา': { x: 20, y: 62 }, 'อานุภาพ': { x: 38, y: 61 }, 'เกษม': { x: 36, y: 70 }, 'พงษ์ศักดิ์': { x: 36, y: 70 }, 'พิไลวรรณ': { x: 18, y: 87 }, 'อรพรรณ': { x: 34, y: 87 }, 'วีระวัฒน์': { x: 39, y: 79 }, 'เทพพิทักษ์': { x: 50, y: 50 }, 'ประจันทร์': { x: 57, y: 39 }, 'ดุสิต': { x: 57, y: 42 }, 'วินัย': { x: 53, y: 16 }, 'ภัสสร์พัณณ์': { x: 42, y: 16 } };
       // toggle p4-layout
       const isP4 = floor === 'p4' || floor === 'p8-p4';
       if (isP4) {
